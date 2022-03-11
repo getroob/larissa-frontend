@@ -12,6 +12,7 @@ const theme = createTheme({
       light: '#fff',
       main: '#9d9d9d',
       dark: '#000',
+      contrastText: '#fff',
     },
     error: {
       main: '#f00',
@@ -19,6 +20,9 @@ const theme = createTheme({
     overrides: {
       MuiButton: {
         raisedPrimary: {
+          color: '#fff',
+        },
+        raisedSecondary: {
           color: '#fff',
         },
       },

@@ -203,12 +203,11 @@ const MunicipalityForm = () => {
                 <StepLabel>{step.label}</StepLabel>
                 <StepContent style={{ textAlign: '-webkit-center' }}>
                   {visibleForm(activeStep)}
-                  <Box sx={{ display: 'flex', maxWidth: '500px', mt: 2, color: 'white' }}>
+                  <Box sx={{ display: 'flex', maxWidth: '500px', p: 1, mt: 2 }}>
                     <Button
-                      color="inherit"
+                      color="secondary"
                       disabled={activeStep === 0}
                       onClick={handleBack}
-                      sx={{ ml: 1 }}
                       variant="contained"
                       startIcon={<ArrowBackIosNewIcon />}
                     >
@@ -216,11 +215,11 @@ const MunicipalityForm = () => {
                     </Button>
                     <Box sx={{ flex: '1 0 auto' }} />
                     {activeStep !== 4 ? (
-                      <Button onClick={handleNext} sx={{ mr: 1 }} variant="contained" endIcon={<ArrowForwardIosIcon />}>
+                      <Button onClick={handleNext} variant="contained" endIcon={<ArrowForwardIosIcon />}>
                         Next
                       </Button>
                     ) : (
-                      <Button onClick={handleSubmit(onSubmit)} sx={{ mr: 1 }} variant="contained">
+                      <Button onClick={handleSubmit(onSubmit)} variant="contained">
                         Submit
                       </Button>
                     )}
