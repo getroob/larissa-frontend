@@ -4,13 +4,21 @@ import { Grid, TextField } from '@mui/material';
 
 const ResponsibleForm = ({ isWritable, control }) => {
   return (
-    <>
+    <Grid container spacing={2} direction="column" style={{ maxWidth: '500px' }}>
       <Grid item>
         <Controller
           name="responsible.fullname"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Ονοματεπώνυμο" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Ονοματεπώνυμο"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
@@ -18,8 +26,16 @@ const ResponsibleForm = ({ isWritable, control }) => {
         <Controller
           name="responsible.residency"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Τόπος Κατοικίας" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Τόπος Κατοικίας"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
@@ -27,12 +43,20 @@ const ResponsibleForm = ({ isWritable, control }) => {
         <Controller
           name="responsible.category"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Κατηγορία" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Κατηγορία"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
-    </>
+    </Grid>
   );
 };
 

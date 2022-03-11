@@ -1,28 +1,28 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "@mui/material/Container";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Box from "@mui/material/Box";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from '@mui/material/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Box from '@mui/material/Box';
 
-import Footer from "./components/Footer";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import TopNav from "./components/TopNav";
-import Municipality from "./components/Municipality";
-import MunicipalityForm from "./components/MunicipalityForm";
-import Preperation from "./components/Preperation";
-import RefugeeForm from "./components/RefugeeForm";
-import Appointment from "./components/Appointment";
-import Home from "./components/Home";
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Register from './components/Register';
+import TopNav from './components/TopNav';
+import Municipality from './components/Municipality';
+import MunicipalityForm from './components/MunicipalityForm';
+import Preperation from './components/Preperation';
+import RefugeeForm from './components/RefugeeForm';
+import Appointment from './components/Appointment';
+import Home from './components/Home';
 
-import useWindowDimentions from "./tools/windowDimentions";
-import ScrollTop from "./tools/ScrollTop";
-import { useEffect, useState } from "react";
-import { setUserAction } from "./redux/actions/user";
-import meUser from "./api/get/meUser";
-import { setLoggedInAction } from "./redux/actions/loggedIn";
-import refreshToken from "./api/post/refreshToken";
-import Loading from "./tools/Loading";
+import useWindowDimentions from './tools/windowDimentions';
+import ScrollTop from './tools/ScrollTop';
+import { useEffect, useState } from 'react';
+import { setUserAction } from './redux/actions/user';
+import meUser from './api/get/meUser';
+import { setLoggedInAction } from './redux/actions/loggedIn';
+import refreshToken from './api/post/refreshToken';
+import Loading from './tools/Loading';
 
 const App = () => {
   const { height } = useWindowDimentions();
@@ -66,20 +66,20 @@ const App = () => {
       maxWidth={false}
       sx={{
         minHeight: height,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}
     >
       <Router>
         <TopNav />
         <Box
           sx={{
-            mt: 8,
+            mt: 10,
             flexGrow: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
           }}
         >
           <Routes>

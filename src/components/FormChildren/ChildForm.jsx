@@ -1,101 +1,170 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import { Grid, TextField } from '@mui/material';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
 
 const ChildForm = ({ isWritable, control }) => {
   return (
-    <>
+    <Grid container spacing={2} direction="column" style={{ maxWidth: '500px' }}>
       <Grid item>
         <Controller
-          name="lastname"
+          name="child.lastname"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Επίθετο" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Επίθετο"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="firstName"
+          name="child.firstName"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Όνομα" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Όνομα"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="gender"
+          name="child.gender"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Φύλο" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Φύλο"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="birthdate"
+          name="child.birthday"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Ημερομηνία Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <MobileDateTimePicker
+                label="Ημερομηνία και Ώρα Γέννησης"
+                variant="outlined"
+                value={value}
+                onChange={onChange}
+                inputFormat="dd/MM/yyyy HH:mm"
+                error={!!error}
+                helperText={error ? error.message : null}
+                renderInput={(params) => <TextField {...params} fullWidth />}
+              />
+            </LocalizationProvider>
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="birthtime"
+          name="child.birthbuilding"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Ώρα Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Μέρος Γέννησης"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="birthbuilding"
+          name="child.birthtype"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Μέρος Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Είδος Τοκετού"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="birthtype"
+          name="child.ssn"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Είδος Τοκετού" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Α.Μ.Κ.Α."
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="ssn"
+          name="child.birthplace"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Α.Μ.Κ.Α." variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Τόπος Γέννησης"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="birthplace"
+          name="child.birthwitness"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Τόπος Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Παραστάτες Γέννησης"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
       </Grid>
-      <Grid item>
-        <Controller
-          name="birthwitness"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField label="Παραστάτες Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth />
-          )}
-        />
-      </Grid>
-    </>
+    </Grid>
   );
 };
 
