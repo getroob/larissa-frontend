@@ -13,6 +13,7 @@ import MunicipalityForm from "./components/MunicipalityForm";
 import Preperation from "./components/Preperation";
 import RefugeeForm from "./components/RefugeeForm";
 import Appointment from "./components/Appointment";
+import DetailsList from "./components/DetailsList";
 import Home from "./components/Home";
 
 import useWindowDimentions from "./tools/windowDimentions";
@@ -95,6 +96,7 @@ const App = () => {
             <Route path="/refugeeForm" element={<RefugeeForm />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/municipality" element={<Municipality />} />
+            <Route path="/list" element={<DetailsList />} />
           </Routes>
         </Box>
       </Router>
