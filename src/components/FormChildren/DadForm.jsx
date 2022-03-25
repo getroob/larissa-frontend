@@ -10,15 +10,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.lastName"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Επίθετο"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Επίθετο" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -27,15 +19,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.firstName"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Όνομα"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Όνομα" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -44,15 +28,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.citizenship"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Ιθαγένεια"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Ιθαγένεια" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -61,15 +37,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.residency"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Τόπος Κατοικίας"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Τόπος Κατοικίας" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -78,15 +46,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.religion"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Θρήσκευμα"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Θρήσκευμα" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -95,15 +55,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.faith"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Δόγμα"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Δόγμα" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -112,15 +64,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.municipalityRegistered"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Δήμος Εγγραφής"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Δήμος Εγγραφής" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -129,15 +73,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.municipalityId"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Αρ. Δημοτολογίου"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Αρ. Δημοτολογίου" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -146,15 +82,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.vat"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Α.Φ.Μ."
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Α.Φ.Μ." variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -163,15 +91,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.ssn"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Α.Μ.Κ.Α."
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Α.Μ.Κ.Α." variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -180,15 +100,7 @@ const DadForm = ({ isWritable, control }) => {
           name="father.ssprovider"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Φορέας Ασφάλισης"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Φορέας Ασφάλισης" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>

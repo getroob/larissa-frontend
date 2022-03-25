@@ -10,15 +10,7 @@ const ResponsibleForm = ({ isWritable, control }) => {
           name="responsible.fullname"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Ονοματεπώνυμο"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Ονοματεπώνυμο" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -27,15 +19,7 @@ const ResponsibleForm = ({ isWritable, control }) => {
           name="responsible.residency"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Τόπος Κατοικίας"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Τόπος Κατοικίας" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -44,15 +28,7 @@ const ResponsibleForm = ({ isWritable, control }) => {
           name="responsible.category"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Κατηγορία"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Κατηγορία" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
