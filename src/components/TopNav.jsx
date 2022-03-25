@@ -24,8 +24,6 @@ import { Logout } from "@mui/icons-material";
 import logoutUser from "../api/post/logoutUser";
 import { setUserAction } from "../redux/actions/user";
 
-const pages = ["Products", "Pricing", "Blog"];
-
 const TopNav = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -114,11 +112,73 @@ const TopNav = () => {
                       display: { xs: "block", md: "none" },
                     }}
                   >
-                    {pages.map((page) => (
-                      <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page}</Typography>
-                      </MenuItem>
-                    ))}
+                    {user.role === "municipality" ? (
+                      <>
+                        <Link
+                          to="/municipalityForms"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <MenuItem key="Forms" onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">Forms</Typography>
+                          </MenuItem>
+                        </Link>
+                        <Link
+                          to="/municipalityAppointments"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <MenuItem
+                            key="Appointments"
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign="center">
+                              Appointments
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          to="/preperation"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <MenuItem
+                            key="Preperation"
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign="center">
+                              Preperation
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                        <Link
+                          to="/refugeeForms"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <MenuItem
+                            key="Validate Forms"
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign="center">
+                              Validate Forms
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                        <Link
+                          to="/refugeeAppointments"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <MenuItem
+                            key="Appointments"
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign="center">
+                              Appointments
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                      </>
+                    )}
                   </Menu>
                 </Box>
                 <Typography
@@ -135,15 +195,73 @@ const TopNav = () => {
                   Roob.
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  {pages.map((page) => (
-                    <Button
-                      key={page}
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                    >
-                      {page}
-                    </Button>
-                  ))}
+                  {user.role === "municipality" ? (
+                    <>
+                      <Link
+                        to="/municipalityForms"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          key="Forms"
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          Forms
+                        </Button>
+                      </Link>
+                      <Link
+                        to="/municipalityAppointments"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          key="Appointments"
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          Appointments
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/preperation"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          key="Preperation"
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          Preperation
+                        </Button>
+                      </Link>
+                      <Link
+                        to="/refugeeForms"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          key="Validate Forms"
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          Validate Forms
+                        </Button>
+                      </Link>
+                      <Link
+                        to="/refugeeAppointments"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          key="Appointments"
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          Appointments
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </Box>
 
                 <Box sx={{ flexGrow: 0 }}>

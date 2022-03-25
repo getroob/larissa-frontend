@@ -8,8 +8,8 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import TopNav from "./components/TopNav";
-import Municipality from "./components/Municipality";
-import MunicipalityForm from "./components/MunicipalityForm";
+import MunicipalityAppointments from "./components/MunicipalityAppointments";
+import EditForm from "./components/EditForm";
 import Preperation from "./components/Preperation";
 import RefugeeForm from "./components/RefugeeForm";
 import Appointment from "./components/Appointment";
@@ -84,19 +84,33 @@ const App = () => {
           }}
         >
           <Routes>
+            {/* auth */}
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
 
+            {/* refugee */}
             <Route path="/preperation" element={<Preperation />} />
             <Route
-              path="/municipalityForm/:formId"
-              element={<MunicipalityForm />}
+              path="/refugeeForms"
+              element={<DetailsList type="validateForms" />}
             />
-            <Route path="/refugeeForm" element={<RefugeeForm />} />
-            <Route path="/appointment" element={<Appointment />} />
-            <Route path="/municipality" element={<Municipality />} />
-            <Route path="/list" element={<DetailsList />} />
+            <Route path="/refugeeAppointments" element={<Appointment />} />
+
+            {/* municipalicy */}
+            <Route
+              path="/municipalityForms"
+              element={<DetailsList type="municipalityForms" />}
+            />
+            <Route
+              path="/municipalityAppointments"
+              element={<MunicipalityAppointments />}
+            />
+
+            {/* common */}
+            <Route path="/forms/:formId" element={<EditForm />} />
+
+            {/* <Route path="/list" element={<DetailsList />} /> */}
           </Routes>
         </Box>
       </Router>

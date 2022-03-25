@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import DetailsList from "./DetailsList";
 import RefugeeForm from "./RefugeeForm";
 
 const Preperation = () => {
@@ -61,7 +62,7 @@ const Preperation = () => {
         </ListGroup.Item>
       </ListGroup>
       <h3 className="mt-5">Προετοιμασια δικαιολογητικων και αλλων στοιχειων</h3>
-      <RefugeeForm />
+      <DetailsList type="preperation" />
     </div>
   );
 };

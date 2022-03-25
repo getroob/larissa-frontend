@@ -5,8 +5,10 @@ const Home = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!user) window.location.href = "/login";
-  }, [user]);
+    user.role === "municipality"
+      ? window.location.replace("/municipalityForms")
+      : window.location.replace("/refugeeForms");
+  }, []);
 
   return <div>Home</div>;
 };

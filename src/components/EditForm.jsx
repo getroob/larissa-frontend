@@ -210,7 +210,8 @@ const MunicipalityForm = () => {
 
   const onSubmit = async (data, retry) => {
     try {
-      const response = await updateForm(data);
+      await updateForm(data);
+      window.location.replace("/");
     } catch (error) {
       if (retry) {
         try {
