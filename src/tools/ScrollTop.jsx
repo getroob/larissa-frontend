@@ -27,7 +27,7 @@ const ScrollTop = () => {
         sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
         <Fab color="secondary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
+          {/* <KeyboardArrowUpIcon /> */}
         </Fab>
       </Box>
     </Zoom>

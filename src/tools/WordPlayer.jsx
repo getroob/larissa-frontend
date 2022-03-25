@@ -1,12 +1,12 @@
-import { Typography, IconButton } from '@mui/material';
-import { useState, useEffect, setState } from 'react';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import { Typography, IconButton } from "@mui/material";
+import { useState, useEffect, setState } from "react";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 
 const WordPlayer = ({ word, lang }) => {
   const debug = true;
-  const baseUrl = 'https://testcalst.hf.ntnu.no';
-  const [url, setUrl] = useState('');
+  const baseUrl = "https://testcalst.hf.ntnu.no";
+  const [url, setUrl] = useState("");
   const [play, setPlay] = useState(false);
   const [audio, setAudio] = useState(new Audio(null));
 
@@ -21,7 +21,6 @@ const WordPlayer = ({ word, lang }) => {
         mp3Url = `${process.env.PUBLIC_URL}/assets/${word}.mp3`;
       }
       setUrl(mp3Url);
-      console.log(mp3Url);
       setAudio(new Audio(mp3Url));
     }
   }, []);
@@ -34,7 +33,11 @@ const WordPlayer = ({ word, lang }) => {
   return (
     <div>
       <Typography>
-        <IconButton aria-label="play" color="primary" onClick={() => togglePlay()}>
+        <IconButton
+          aria-label="play"
+          color="primary"
+          onClick={() => togglePlay()}
+        >
           <PlayCircleIcon />
         </IconButton>
         {word}

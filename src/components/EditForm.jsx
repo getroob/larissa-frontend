@@ -1,21 +1,33 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Container, Grid, TextField, Box, Button, Typography, Stepper, Step, StepLabel, StepContent } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  Container,
+  Grid,
+  TextField,
+  Box,
+  Button,
+  Typography,
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+} from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-import ChildForm from './FormChildren/ChildForm';
-import DadForm from './FormChildren/DadForm';
-import MomForm from './FormChildren/MomForm';
-import DoctorForm from './FormChildren/DoctorForm';
-import ResponsibleForm from './FormChildren/ResponsibleForm';
-import { useParams } from 'react-router-dom';
-import getForm from '../api/get/getForm';
-import { useSelector } from 'react-redux';
-import refreshToken from '../api/post/refreshToken';
-import updateForm from '../api/put/updateForm';
+import ChildForm from "./FormChildren/ChildForm";
+import DadForm from "./FormChildren/DadForm";
+import MomForm from "./FormChildren/MomForm";
+import DoctorForm from "./FormChildren/DoctorForm";
+import ResponsibleForm from "./FormChildren/ResponsibleForm";
+import { useParams } from "react-router-dom";
+import getForm from "../api/get/getForm";
+import { useSelector } from "react-redux";
+import refreshToken from "../api/post/refreshToken";
+import updateForm from "../api/put/updateForm";
+import LanguageHelper from "../tools/LanguageHelper";
 
 const MunicipalityForm = () => {
   const [isWritable, setWritable] = useState(true);
@@ -23,7 +35,7 @@ const MunicipalityForm = () => {
   const validationSchema = [
     yup.object().shape({
       child: yup.object().shape({
-        firstName: yup.string().label('First Name').required(),
+        firstName: yup.string().label("First Name").required(),
         lastname: yup.string().required(),
         gender: yup.string().required(),
         birthday: yup.string().required(),
@@ -83,76 +95,76 @@ const MunicipalityForm = () => {
     shouldUnregister: false,
     defaultValues: {
       child: {
-        firstName: '',
-        lastname: '',
-        gender: '',
+        firstName: "",
+        lastname: "",
+        gender: "",
         birthday: new Date(),
-        birthbuilding: '',
-        birthtype: '',
-        ssn: '',
-        birthplace: '',
-        birthwitness: '',
+        birthbuilding: "",
+        birthtype: "",
+        ssn: "",
+        birthplace: "",
+        birthwitness: "",
       },
       responsible: {
-        fullname: '',
-        residency: '',
-        category: '',
+        fullname: "",
+        residency: "",
+        category: "",
       },
       doctor: {
-        fullname: '',
-        residency: '',
-        phone: '',
+        fullname: "",
+        residency: "",
+        phone: "",
       },
       father: {
-        lastName: '',
-        firstName: '',
-        citizenship: '',
-        residency: '',
-        religion: '',
-        faith: '',
-        municipalityRegistered: '',
-        municipalityId: '',
-        vat: '',
-        ssn: '',
-        ssprovider: '',
+        lastName: "",
+        firstName: "",
+        citizenship: "",
+        residency: "",
+        religion: "",
+        faith: "",
+        municipalityRegistered: "",
+        municipalityId: "",
+        vat: "",
+        ssn: "",
+        ssprovider: "",
       },
       mother: {
-        lastName: '',
-        firstName: '',
-        citizenship: '',
-        residency: '',
-        religion: '',
-        faith: '',
-        municipalityRegistered: '',
-        municipalityId: '',
-        vat: '',
-        ssn: '',
-        ssprovider: '',
+        lastName: "",
+        firstName: "",
+        citizenship: "",
+        residency: "",
+        religion: "",
+        faith: "",
+        municipalityRegistered: "",
+        municipalityId: "",
+        vat: "",
+        ssn: "",
+        ssprovider: "",
       },
     },
     resolver: yupResolver(validationSchema[activeStep]),
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const steps = [
     {
-      label: 'Στοιχεία Παιδιού',
+      label: "Στοιχεία Παιδιού",
       content: <ChildForm control={control} isWritable={isWritable} />,
     },
     {
-      label: 'Στοιχεία Πατέρα',
+      label: "Στοιχεία Πατέρα",
       content: <DadForm control={control} isWritable={isWritable} />,
     },
     {
-      label: 'Στοιχεία Μητέρας',
+      label: "Στοιχεία Μητέρας",
       content: <MomForm control={control} isWritable={isWritable} />,
     },
     {
-      label: 'Στοιχεία Γιατρού',
+      label: "Στοιχεία Γιατρού",
       content: <DoctorForm control={control} isWritable={isWritable} />,
     },
     {
-      label: 'Στοιχεία Μάρτυρα',
+      label: "Στοιχεία Μάρτυρα",
       content: <ResponsibleForm control={control} isWritable={isWritable} />,
     },
   ];
@@ -218,7 +230,7 @@ const MunicipalityForm = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!user) window.location.href = '/login';
+    if (!user) window.location.href = "/login";
   }, [user]);
 
   useEffect(() => loadForm(true), [formId]);
@@ -226,14 +238,14 @@ const MunicipalityForm = () => {
   return (
     <Container component="main">
       <form>
-        <Box sx={{ justifyContent: 'flex-start' }}>
+        <Box sx={{ justifyContent: "flex-start" }}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step) => (
               <Step key={step.label}>
                 <StepLabel>{step.label}</StepLabel>
-                <StepContent style={{ textAlign: '-webkit-center' }}>
+                <StepContent style={{ textAlign: "-webkit-center" }}>
                   {visibleForm(activeStep)}
-                  <Box sx={{ display: 'flex', maxWidth: '500px', p: 1, mt: 2 }}>
+                  <Box sx={{ display: "flex", maxWidth: "500px", p: 1, mt: 2 }}>
                     <Button
                       color="secondary"
                       disabled={activeStep === 0}
@@ -243,13 +255,20 @@ const MunicipalityForm = () => {
                     >
                       Back
                     </Button>
-                    <Box sx={{ flex: '1 0 auto' }} />
+                    <Box sx={{ flex: "1 0 auto" }} />
                     {activeStep !== 4 ? (
-                      <Button onClick={handleNext} variant="contained" endIcon={<ArrowForwardIosIcon />}>
+                      <Button
+                        onClick={handleNext}
+                        variant="contained"
+                        endIcon={<ArrowForwardIosIcon />}
+                      >
                         Next
                       </Button>
                     ) : (
-                      <Button onClick={handleSubmit((data) => onSubmit(data, true))} variant="contained">
+                      <Button
+                        onClick={handleSubmit((data) => onSubmit(data, true))}
+                        variant="contained"
+                      >
                         Submit
                       </Button>
                     )}
@@ -260,6 +279,7 @@ const MunicipalityForm = () => {
           </Stepper>
         </Box>
       </form>
+      <LanguageHelper />
     </Container>
   );
 };
