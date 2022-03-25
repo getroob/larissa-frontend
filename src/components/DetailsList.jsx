@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,6 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import LanguageHelper from '../tools/LanguageHelper';
 
 const columns = [
   {
@@ -67,45 +71,64 @@ const DetailsList = (props) => {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow style={{ height: 20 }}>
-              {columns.map((column) => (
-                <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth, height: 'auto !important' }}>
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => openDetails(row.id)}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align} className="no-select">
-                        {column.id === 'status' ? <Chip label={value} color="success" variant="outlined" /> : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <>
+      <Box mb={2} sx={{ alignSelf: 'flex-end' }}>
+        <Button variant="contained" startIcon={<AddIcon />}>
+          ΝΕΟ ΑΤΟΜΟ
+        </Button>
+      </Box>
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow style={{ height: 20 }}>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth, height: 'auto !important' }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                return (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.id}
+                    onClick={() => openDetails(row.id)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align} className="no-select">
+                          {column.id === 'status' ? <Chip label={value} color="success" variant="outlined" /> : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+        <LanguageHelper />
+      </Paper>
+    </>
   );
 };
 

@@ -13,15 +13,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.lastname"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Επίθετο"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Επίθετο" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -30,15 +22,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.firstName"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Όνομα"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Όνομα" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -47,15 +31,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.gender"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Φύλο"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Φύλο" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -84,15 +60,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.birthbuilding"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Μέρος Γέννησης"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Μέρος Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -101,15 +69,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.birthtype"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Είδος Τοκετού"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Είδος Τοκετού" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -118,15 +78,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.ssn"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Α.Μ.Κ.Α."
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Α.Μ.Κ.Α." variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -135,15 +87,7 @@ const ChildForm = ({ isWritable, control }) => {
           name="child.birthplace"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Τόπος Γέννησης"
-              variant="outlined"
-              value={value}
-              onChange={onChange}
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
+            <TextField label="Τόπος Γέννησης" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
           )}
         />
       </Grid>
@@ -159,7 +103,6 @@ const ChildForm = ({ isWritable, control }) => {
               onChange={onChange}
               fullWidth
               error={!!error}
-              helperText={error ? error.message : null}
             />
           )}
         />
