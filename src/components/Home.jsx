@@ -10,6 +10,10 @@ const Home = () => {
       : window.location.replace("/refugeeForms");
   }, []);
 
+  useEffect(() => {
+    if (!user) window.location.href = "/login";
+  }, [user]);
+
   return <div>Home</div>;
 };
 
