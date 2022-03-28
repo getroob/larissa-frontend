@@ -59,6 +59,10 @@ const App = () => {
 
   useEffect(() => void getUser(true), []);
 
+  useEffect(() => {
+    if (!user) window.location.href = "/login";
+  }, [user]);
+
   if (loading) return <Loading />;
 
   return (
