@@ -250,7 +250,7 @@ const DetailsList = (props) => {
               select
               fullWidth
               label="Κηδεμονας"
-              value={refugees[0].id}
+              value={refugeeId}
               onChange={(event) => setRefugeeId(event.target.value)}
               SelectProps={{
                 native: true,
