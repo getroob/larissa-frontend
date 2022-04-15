@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import refreshToken from "../api/post/refreshToken";
 import getForms from "../api/get/getForms";
 import getRefugees from "../api/get/getRefugees";
-import { Link } from "react-router-dom";
 import {
   Alert,
   Button,
@@ -28,24 +27,15 @@ import {
 import createForm from "../api/post/createForm";
 
 const columns = [
-  {
-    id: "status",
-    label: "Κατάσταση",
-    minWidth: 170,
-  },
-  { id: "childFullName", label: "Όνομα Παιδίου", minWidth: 170 },
+  // {
+  //   id: "status",
+  //   label: "Κατάσταση",
+  //   minWidth: 170,
+  // },
+  // { id: "childFullName", label: "Όνομα Παιδίου", minWidth: 170 },
   { id: "fatherFullName", label: "Όνομα Πατέρα", minWidth: 100 },
-  {
-    id: "motherFullName",
-    label: "Όνομα Μητέρας",
-    minWidth: 170,
-  },
-  {
-    id: "birthday",
-    label: "Ημερομηνία Γέννησης",
-    minWidth: 170,
-    format: (value) => value.toLocaleString("el-GR"),
-  },
+  { id: "motherFullName", label: "Όνομα Μητέρας" },
+  { id: "phone", label: "Τηλεφωνο", minWidth: 100 },
 ];
 
 const DetailsList = (props) => {
@@ -63,23 +53,27 @@ const DetailsList = (props) => {
   const loadForms = async (retry) => {
     try {
       const response = await getForms(props.type);
+      console.log(response);
+
       setRows(
-        response.map((form) => {
-          return {
-            id: form.id,
-            status: "Test",
-            childFullName: `${form.child.firstName || ""} ${
-              form.child.lastname || ""
-            }`,
-            fatherFullName: `${form.father.firstName || ""} ${
-              form.father.lastname || ""
-            }`,
-            motherFullName: `${form.mother.firstName || ""} ${
-              form.mother.lastname || ""
-            }`,
-            birthday: Date(form.child.birthday).slice(0, 15) || "",
-          };
-        })
+        response
+          .sort((a, b) => b?.updatedAt?.localeCompare(a?.updatedAt))
+          .map((form) => {
+            return {
+              id: form.id,
+              // status: "Test",
+              // childFullName: `${form.child.firstName || ""} ${
+              //   form.child.lastname || ""
+              // }`,
+              fatherFullName: `${form.father.firstName || ""} ${
+                form.father.lastName || ""
+              }`,
+              motherFullName: `${form.mother.firstName || ""} ${
+                form.mother.lastName || ""
+              }`,
+              phone: form.residency?.phone,
+            };
+          })
       );
     } catch (error) {
       if (retry) {
@@ -132,7 +126,7 @@ const DetailsList = (props) => {
       if (retry) {
         try {
           await refreshToken();
-          await loadForms(false);
+          await createForm(false);
         } catch (error) {
           alert(error);
         }
@@ -157,17 +151,21 @@ const DetailsList = (props) => {
 
   return (
     <Container>
-      {props.type !== "validateForms" && (
+      {props.type !== "validateForms" && props.type !== "preparedForms" && (
         <Grid sx={{ display: "flex", justifyContent: "flex-end", my: 2 }}>
           <Button
             variant="contained"
+            disabled={rows.length >= 2 && user.role === "refugee"}
             onClick={() =>
-              props.type === "municipalityForms"
-                ? setOpenPopup(true)
-                : addForm(true)
+              // props.type === "municipalityForms"
+              //   ? setOpenPopup(true)
+              //   :
+              addForm(true)
             }
           >
-            Add Form
+            {rows.length >= 2 && user.role === "refugee"
+              ? "Max forms allowed: 2"
+              : "Add Form"}
           </Button>
         </Grid>
       )}
@@ -181,6 +179,7 @@ const DetailsList = (props) => {
                     key={column.id}
                     align={column.align}
                     style={{
+                      fontWeight: "bold",
                       minWidth: column.minWidth,
                       height: "auto !important",
                     }}
@@ -195,7 +194,15 @@ const DetailsList = (props) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.id}
+                      onClick={() =>
+                        window.location.replace(`/forms/${row.id}`)
+                      }
+                    >
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
@@ -203,9 +210,6 @@ const DetailsList = (props) => {
                             key={column.id}
                             align={column.align}
                             className="no-select"
-                            onClick={() =>
-                              window.location.replace(`/forms/${row.id}`)
-                            }
                           >
                             {column.id === "status" ? (
                               <Chip

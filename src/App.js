@@ -11,7 +11,6 @@ import TopNav from "./components/TopNav";
 import MunicipalityAppointments from "./components/MunicipalityAppointments";
 import EditForm from "./components/EditForm";
 import Preperation from "./components/Preperation";
-import RefugeeForm from "./components/RefugeeForm";
 import Appointment from "./components/Appointment";
 import DetailsList from "./components/DetailsList";
 import Home from "./components/Home";
@@ -24,14 +23,13 @@ import meUser from "./api/get/meUser";
 import { setLoggedInAction } from "./redux/actions/loggedIn";
 import refreshToken from "./api/post/refreshToken";
 import Loading from "./tools/Loading";
+import LanguageHelper from "./tools/LanguageHelper";
 
 const App = () => {
   const { height } = useWindowDimentions();
 
   const [loading, setLoading] = useState(true);
 
-  const loggedIn = useSelector((state) => state.loggedIn);
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const getUser = async (retry) => {
@@ -91,10 +89,10 @@ const App = () => {
 
             {/* refugee */}
             <Route path="/preperation" element={<Preperation />} />
-            <Route
+            {/* <Route
               path="/refugeeForms"
               element={<DetailsList type="validateForms" />}
-            />
+            /> */}
             <Route path="/refugeeAppointments" element={<Appointment />} />
 
             {/* municipalicy */}
@@ -103,19 +101,21 @@ const App = () => {
               element={<DetailsList type="municipalityForms" />}
             />
             <Route
+              path="/preparedForms"
+              element={<DetailsList type="preparedForms" />}
+            />
+            {/* <Route
               path="/municipalityAppointments"
               element={<MunicipalityAppointments />}
-            />
+            /> */}
 
             {/* common */}
             <Route path="/forms/:formId" element={<EditForm />} />
-
-            {/* <Route path="/list" element={<DetailsList />} /> */}
           </Routes>
         </Box>
       </Router>
-      <Footer />
-      <ScrollTop />
+      {/* <Footer /> */}
+      <LanguageHelper />
     </Container>
   );
 };

@@ -5,19 +5,12 @@ const Footer = () => {
   return (
     <Container
       maxWidth="xl"
-      sx={{ px: 1, py: 2, display: "flex", justifyContent: "flex-end" }}
+      sx={{ px: 1, py: 2, display: "flex", justifyContent: "flex-start" }}
     >
       <Link
-        href="https://getroob.com"
+        href="tel:+30 2413500254"
         target="_blank"
-        sx={{ pl: 3, color: "secondary.main", textDecoration: "none" }}
-      >
-        About
-      </Link>
-      <Link
-        href="mailto:support@getroob.com"
-        target="_blank"
-        sx={{ pl: 3, color: "secondary.main", textDecoration: "none" }}
+        sx={{ color: "secondary.main", textDecoration: "none" }}
       >
         Contact
       </Link>

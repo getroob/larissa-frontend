@@ -21,69 +21,68 @@ import refreshToken from "../api/post/refreshToken";
 import getForms from "../api/get/getForms";
 import { Alert } from "@mui/material";
 import createAppointment from "../api/post/createAppointment";
-import MunicipalityAppointments from "./MunicipalityAppointments";
 import moment from "moment";
 import getAppointments from "../api/get/getAppointments";
 
 const Appointment = () => {
-  const { control, handleSubmit } = useForm();
-  const [forms, setForms] = useState([]);
-  const [kid, setKid] = useState("");
-  const [appointments, setAppointments] = useState([]);
+  // const { control, handleSubmit } = useForm();
+  // const [forms, setForms] = useState([]);
+  // const [kid, setKid] = useState("");
+  // const [appointments, setAppointments] = useState([]);
 
-  const loadForms = async (retry) => {
-    try {
-      const response = await getForms("validateForms");
-      setForms(response);
-    } catch (error) {
-      if (retry) {
-        try {
-          await refreshToken();
-          await loadForms(false);
-        } catch (error) {
-          alert(error);
-        }
-      } else {
-        alert(error);
-      }
-    }
-  };
+  // const loadForms = async (retry) => {
+  //   try {
+  //     const response = await getForms("validateForms");
+  //     setForms(response);
+  //   } catch (error) {
+  //     if (retry) {
+  //       try {
+  //         await refreshToken();
+  //         await loadForms(false);
+  //       } catch (error) {
+  //         alert(error);
+  //       }
+  //     } else {
+  //       alert(error);
+  //     }
+  //   }
+  // };
 
-  const loadAppointments = async (retry) => {
-    try {
-      const response = await getAppointments();
-      setAppointments(response);
-    } catch (error) {
-      if (retry) {
-        try {
-          await refreshToken();
-          await loadAppointments(false);
-        } catch (error) {
-          alert(error);
-        }
-      } else {
-        alert(error);
-      }
-    }
-  };
+  // const loadAppointments = async (retry) => {
+  //   try {
+  //     const response = await getAppointments();
+  //     setAppointments(response);
+  //   } catch (error) {
+  //     if (retry) {
+  //       try {
+  //         await refreshToken();
+  //         await loadAppointments(false);
+  //       } catch (error) {
+  //         alert(error);
+  //       }
+  //     } else {
+  //       alert(error);
+  //     }
+  //   }
+  // };
 
-  const onSubmit = async (data, retry) => {
-    try {
-      await createAppointment(new Date(data.appointment), kid);
-      window.location.replace("/");
-    } catch (error) {
-      if (retry) {
-        try {
-          await refreshToken();
-          await onSubmit(data, false);
-        } catch (error) {
-          alert(error);
-        }
-      } else {
-        alert(error);
-      }
-    }
-  };
+  // const onSubmit = async (data, retry) => {
+  //   try {
+  //     await createAppointment(new Date(data.appointment), kid);
+  //     window.location.replace("/");
+  //   } catch (error) {
+  //     if (retry) {
+  //       try {
+  //         await refreshToken();
+  //         await onSubmit(data, false);
+  //       } catch (error) {
+  //         alert(error);
+  //       }
+  //     } else {
+  //       alert(error);
+  //     }
+  //   }
+  // };
 
   const user = useSelector((state) => state.user);
 
@@ -91,11 +90,36 @@ const Appointment = () => {
     if (!user) window.location.href = "/login";
   }, [user]);
 
-  useEffect(() => loadForms(true) && loadAppointments(true), []);
+  // useEffect(() => loadForms(true) && loadAppointments(true), []);
 
   return (
-    <Container component="main" maxWidth="xs">
-      {forms.length > 0 ? (
+    <Container
+      component="main"
+      maxWidth="sm"
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <Alert color="warning" sx={{ mb: 4 }}>
+        θα πρέπει να έχει μαζί σας κάποιο επίσημο έγγραφο ταυτοπροσωπίας, τόσο
+        εσεις, όσο και ο επίσημος μεταφραστής ή κοινωνικός λειτουργός που θα σας
+        συνοδεύει.
+      </Alert>
+      <Typography
+        variant="h5"
+        gutterBottom
+        component="div"
+        sx={{ textAlign: "center" }}
+      >
+        To schedule your appointment please call the registry office
+      </Typography>
+      <Button variant="contained">
+        <a
+          href="tel:+30 2413500254"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          Call
+        </a>
+      </Button>
+      {/* {forms.length > 0 ? (
         kid ? (
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form
@@ -176,7 +200,7 @@ const Appointment = () => {
         <Alert color="error">
           Your not invited to schedule any appointments
         </Alert>
-      )}
+      )} */}
     </Container>
   );
 };

@@ -7,14 +7,14 @@ const Home = () => {
   useEffect(() => {
     user.role === "municipality"
       ? window.location.replace("/municipalityForms")
-      : window.location.replace("/refugeeForms");
+      : window.location.replace("/preperation");
   }, []);
 
   useEffect(() => {
     if (!user) window.location.href = "/login";
   }, [user]);
 
-  return <div>Home</div>;
+  return <div>Redirecting...</div>;
 };
 
 export default Home;

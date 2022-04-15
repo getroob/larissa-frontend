@@ -115,14 +115,26 @@ const TopNav = () => {
                     {user.role === "municipality" ? (
                       <>
                         <Link
+                          to="/preparedForms"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <MenuItem key="Forms" onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">
+                              Prepared Forms
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                        <Link
                           to="/municipalityForms"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           <MenuItem key="Forms" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">Forms</Typography>
+                            <Typography textAlign="center">
+                              Municipality Forms
+                            </Typography>
                           </MenuItem>
                         </Link>
-                        <Link
+                        {/* <Link
                           to="/municipalityAppointments"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
@@ -134,7 +146,7 @@ const TopNav = () => {
                               Appointments
                             </Typography>
                           </MenuItem>
-                        </Link>
+                        </Link> */}
                       </>
                     ) : (
                       <>
@@ -151,7 +163,7 @@ const TopNav = () => {
                             </Typography>
                           </MenuItem>
                         </Link>
-                        <Link
+                        {/* <Link
                           to="/refugeeForms"
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
@@ -163,7 +175,7 @@ const TopNav = () => {
                               Validate Forms
                             </Typography>
                           </MenuItem>
-                        </Link>
+                        </Link> */}
                         <Link
                           to="/refugeeAppointments"
                           style={{ textDecoration: "none", color: "inherit" }}
@@ -198,6 +210,18 @@ const TopNav = () => {
                   {user.role === "municipality" ? (
                     <>
                       <Link
+                        to="/preparedForms"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button
+                          key="Forms"
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          Prepared Forms
+                        </Button>
+                      </Link>
+                      <Link
                         to="/municipalityForms"
                         style={{ textDecoration: "none" }}
                       >
@@ -206,10 +230,10 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: "white", display: "block" }}
                         >
-                          Forms
+                          Municipality Forms
                         </Button>
                       </Link>
-                      <Link
+                      {/* <Link
                         to="/municipalityAppointments"
                         style={{ textDecoration: "none" }}
                       >
@@ -220,7 +244,7 @@ const TopNav = () => {
                         >
                           Appointments
                         </Button>
-                      </Link>
+                      </Link> */}
                     </>
                   ) : (
                     <>
@@ -236,7 +260,7 @@ const TopNav = () => {
                           Preperation
                         </Button>
                       </Link>
-                      <Link
+                      {/* <Link
                         to="/refugeeForms"
                         style={{ textDecoration: "none" }}
                       >
@@ -247,7 +271,7 @@ const TopNav = () => {
                         >
                           Validate Forms
                         </Button>
-                      </Link>
+                      </Link> */}
                       <Link
                         to="/refugeeAppointments"
                         style={{ textDecoration: "none" }}
@@ -320,7 +344,7 @@ const TopNav = () => {
                     onClose={handleCloseUserMenu}
                     onClick={handleCloseUserMenu}
                   >
-                    <MenuItem>
+                    {/* <MenuItem>
                       <Avatar /> Profile
                     </MenuItem>
                     <MenuItem>
@@ -338,7 +362,7 @@ const TopNav = () => {
                         <Settings fontSize="small" />
                       </ListItemIcon>
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem onClick={() => handleLogout()}>
                       <ListItemIcon>
                         <Logout fontSize="small" />

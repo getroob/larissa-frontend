@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import DetailsList from "./DetailsList";
-import RefugeeForm from "./RefugeeForm";
 
 const Preperation = () => {
   const user = useSelector((state) => state.user);
@@ -16,8 +15,15 @@ const Preperation = () => {
       <h2>Πληροφοριες σχετικα με την διαδικασια</h2>
       <ListGroup>
         <ListGroup.Item>
+          {/* <a
+            href={`${process.env.PUBLIC_URL}/assets/eleftherios-myriounis.pdf`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read more
+          </a> */}
           <a
-            href="https://drive.google.com/drive/folders/1cRXcuc4egCjEomT0OoPzSM92i1ld8QpT"
+            href={`${process.env.PUBLIC_URL}/assets/Γενικες οδηγιες.pdf`}
             target="_blank"
             rel="noreferrer"
           >
@@ -26,7 +32,7 @@ const Preperation = () => {
         </ListGroup.Item>
         <ListGroup.Item>
           <a
-            href="https://drive.google.com/drive/folders/1cRXcuc4egCjEomT0OoPzSM92i1ld8QpT"
+            href={`${process.env.PUBLIC_URL}/assets/Παραδειγμα πιστοποιητικου γεννησης.pdf`}
             target="_blank"
             rel="noreferrer"
           >
@@ -35,7 +41,7 @@ const Preperation = () => {
         </ListGroup.Item>
         <ListGroup.Item>
           <a
-            href="https://drive.google.com/drive/folders/1cRXcuc4egCjEomT0OoPzSM92i1ld8QpT"
+            href={`${process.env.PUBLIC_URL}/assets/Οδηγιες δηλωσης γεννησεων.pdf`}
             target="_blank"
             rel="noreferrer"
           >
@@ -44,7 +50,7 @@ const Preperation = () => {
         </ListGroup.Item>
         <ListGroup.Item>
           <a
-            href="https://drive.google.com/drive/folders/1cRXcuc4egCjEomT0OoPzSM92i1ld8QpT"
+            href={`${process.env.PUBLIC_URL}/assets/Οδηγιες ονοματοδοσιας.pdf`}
             target="_blank"
             rel="noreferrer"
           >
@@ -53,15 +59,15 @@ const Preperation = () => {
         </ListGroup.Item>
         <ListGroup.Item>
           <a
-            href="https://drive.google.com/drive/folders/1cRXcuc4egCjEomT0OoPzSM92i1ld8QpT"
+            href={`${process.env.PUBLIC_URL}/assets/Παραδειγμα αιτησης ονοματοδοσιας.pdf`}
             target="_blank"
             rel="noreferrer"
           >
-            Παραδειγμα αιτησεις ονοματοδοσιας
+            Παραδειγμα αιτησης ονοματοδοσιας
           </a>
         </ListGroup.Item>
       </ListGroup>
-      <h3 className="mt-5">Προετοιμασια δικαιολογητικων και αλλων στοιχειων</h3>
+      <h3 className="mt-5">Προετοιμασια αιτησης ονοματοδοσιας</h3>
       <DetailsList type="preperation" />
     </div>
   );

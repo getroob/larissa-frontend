@@ -2,7 +2,7 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { Grid, TextField } from "@mui/material";
 
-const DadForm = ({ isWritable, control }) => {
+const ResidencyForm = ({ isWritable, control }) => {
   return (
     <Grid
       container
@@ -12,11 +12,11 @@ const DadForm = ({ isWritable, control }) => {
     >
       <Grid item>
         <Controller
-          name="father.lastName"
+          name="residency.city"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Επίθετο"
+              label="Πόλη"
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -28,11 +28,11 @@ const DadForm = ({ isWritable, control }) => {
       </Grid>
       <Grid item>
         <Controller
-          name="father.firstName"
+          name="residency.address"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Όνομα"
+              label="Διευθυνση"
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -44,11 +44,11 @@ const DadForm = ({ isWritable, control }) => {
       </Grid>
       <Grid item>
         <Controller
-          name="father.ssn"
+          name="residency.phone"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Α.Δ.Τ."
+              label="Τηλεφωνο"
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -60,82 +60,129 @@ const DadForm = ({ isWritable, control }) => {
       </Grid>
       {/* <Grid item>
         <Controller
-          name="father.citizenship"
+          name="mother.residency"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Ιθαγένεια" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Τόπος Κατοικίας"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.residency"
+          name="mother.religion"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Τόπος Κατοικίας" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Θρήσκευμα"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.religion"
+          name="mother.faith"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Θρήσκευμα" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Δόγμα"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.faith"
+          name="mother.municipalityRegistered"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Δόγμα" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Δήμος Εγγραφής"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.municipalityRegistered"
+          name="mother.municipalityId"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Δήμος Εγγραφής" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Αρ. Δημοτολογίου"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.municipalityId"
+          name="mother.vat"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Αρ. Δημοτολογίου" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Α.Φ.Μ."
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.vat"
+          name="mother.ssn"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Α.Φ.Μ." variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Α.Μ.Κ.Α."
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid>
       <Grid item>
         <Controller
-          name="father.ssn"
+          name="mother.ssprovider"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Α.Μ.Κ.Α." variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
-          )}
-        />
-      </Grid>
-      <Grid item>
-        <Controller
-          name="father.ssprovider"
-          control={control}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField label="Φορέας Ασφάλισης" variant="outlined" value={value} onChange={onChange} fullWidth error={!!error} />
+            <TextField
+              label="Φορέας Ασφάλισης"
+              variant="outlined"
+              value={value}
+              onChange={onChange}
+              fullWidth
+              error={!!error}
+            />
           )}
         />
       </Grid> */}
@@ -143,4 +190,4 @@ const DadForm = ({ isWritable, control }) => {
   );
 };
 
-export default DadForm;
+export default ResidencyForm;

@@ -12,7 +12,7 @@ const LanguageHelper = () => {
   const [isVisible, setVisible] = useState(false);
 
   return (
-    <Box sx={{ position: "fixed", bottom: 16, right: 16 }}>
+    <Box sx={{ position: "fixed", bottom: 16, right: 16, zIndex: 2 }}>
       <Box sx={{ position: "absolute", bottom: 62, right: 0 }}>
         <Grow
           in={isVisible}
