@@ -185,10 +185,14 @@ const DetailsList = (props) => {
   return (
     <Container>
       {props.type === "preparedForms" ? (
-        <Typography>Φορμες Προσφυγων</Typography>
+        <Typography component="h1" variant="h1" sx={{ mb: 4 }}>
+          Φορμες Προσφυγων
+        </Typography>
       ) : (
         props.type === "municipalityForms" && (
-          <Typography>Φορμες Ληξιαρχειου</Typography>
+          <Typography component="h1" variant="h1" sx={{ mb: 4 }}>
+            Φορμες Ληξιαρχειου
+          </Typography>
         )
       )}
       {props.type !== "validateForms" && props.type !== "preparedForms" && (
