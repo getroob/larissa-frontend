@@ -185,12 +185,12 @@ const DetailsList = (props) => {
   return (
     <Container>
       {props.type === "preparedForms" ? (
-        <Typography component="h1" variant="h1" sx={{ mb: 4 }}>
+        <Typography component="h5" variant="h5" sx={{ mb: 4 }}>
           Φορμες Προσφυγων
         </Typography>
       ) : (
         props.type === "municipalityForms" && (
-          <Typography component="h1" variant="h1" sx={{ mb: 4 }}>
+          <Typography component="h5" variant="h5" sx={{ mb: 4 }}>
             Φορμες Ληξιαρχειου
           </Typography>
         )
