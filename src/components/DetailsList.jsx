@@ -24,6 +24,7 @@ import {
   DialogTitle,
   Grid,
   TextField,
+  Typography,
 } from "@mui/material";
 import createForm from "../api/post/createForm";
 import pdfMake from "pdfmake/build/pdfmake";
@@ -183,6 +184,13 @@ const DetailsList = (props) => {
 
   return (
     <Container>
+      {props.type === "preparedForms" ? (
+        <Typography>Φορμες Προσφυγων</Typography>
+      ) : (
+        props.type === "municipalityForms" && (
+          <Typography>Φορμες Ληξιαρχειου</Typography>
+        )
+      )}
       {props.type !== "validateForms" && props.type !== "preparedForms" && (
         <Grid sx={{ display: "flex", justifyContent: "flex-end", my: 2 }}>
           <Button

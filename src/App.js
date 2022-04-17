@@ -97,12 +97,12 @@ const App = () => {
 
             {/* municipalicy */}
             <Route
-              path="/municipalityForms"
-              element={<DetailsList type="municipalityForms" />}
-            />
-            <Route
               path="/preparedForms"
               element={<DetailsList type="preparedForms" />}
+            />
+            <Route
+              path="/municipalityForms"
+              element={<DetailsList type="municipalityForms" />}
             />
             {/* <Route
               path="/municipalityAppointments"
