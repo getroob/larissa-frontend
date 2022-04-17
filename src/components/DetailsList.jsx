@@ -126,7 +126,7 @@ const DetailsList = (props) => {
     try {
       await deleteForm(formId);
       handleModal(false);
-      window.location.replace(user.role === "refugee" ? "/preperation" : "/");
+      window.location.replace(user?.role === "refugee" ? "/preperation" : "/");
     } catch (error) {
       if (retry) {
         try {
@@ -199,7 +199,7 @@ const DetailsList = (props) => {
         <Grid sx={{ display: "flex", justifyContent: "flex-end", my: 2 }}>
           <Button
             variant="contained"
-            disabled={rows.length >= 2 && user.role === "refugee"}
+            disabled={rows.length >= 2 && user?.role === "refugee"}
             onClick={() =>
               // props.type === "municipalityForms"
               //   ? setOpenPopup(true)
@@ -207,7 +207,7 @@ const DetailsList = (props) => {
               addForm(true)
             }
           >
-            {rows.length >= 2 && user.role === "refugee"
+            {rows.length >= 2 && user?.role === "refugee"
               ? "Max forms allowed: 2"
               : "Add Form"}
           </Button>
