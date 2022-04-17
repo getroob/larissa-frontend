@@ -40,6 +40,7 @@ const MunicipalityForm = () => {
   const user = useSelector((state) => state.user);
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
   const [createdBy, setCreatedBy] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
   const [isWritable, setWritable] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
@@ -224,7 +225,11 @@ const MunicipalityForm = () => {
       setCreatedBy(response?.createdBy);
       reset(response);
     } catch (error) {
-      if (retry) {
+      if (
+        JSON?.parse(error?.toString()?.replace("Error: ", ""))?.status === 404
+      ) {
+        setNotFound(true);
+      } else if (retry) {
         try {
           await refreshToken();
           await loadForm(false);
@@ -263,24 +268,6 @@ const MunicipalityForm = () => {
     }
   };
 
-  const handleDeleteForm = async (retry) => {
-    try {
-      await deleteForm(formId);
-      window.location.replace(user.role === "refugee" ? "/preperation" : "/");
-    } catch (error) {
-      if (retry) {
-        try {
-          await refreshToken();
-          await handleDeleteForm(false);
-        } catch (error) {
-          alert(error);
-        }
-      } else {
-        alert(error);
-      }
-    }
-  };
-
   useEffect(() => {
     if (!user) window.location.href = "/login";
   }, [user]);
@@ -289,251 +276,63 @@ const MunicipalityForm = () => {
 
   return (
     <Container component="main">
-      <Box display="flex" justifyContent="flex-end">
-        <ButtonGroup>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={() => {
-              const values = getValues();
-
-              pdfMake
-                .createPdf({
-                  content: [
-                    {
-                      columns: [
-                        {
-                          width: 350,
-                          text: "ΑΙΤΗΣΗ ΟΝΟΜΑΤΟΔΟΣΙΑΣ\n\n\n\n",
-                          style: "header",
-                        },
-                        {
-                          text: [
-                            {
-                              style: "spreadLine",
-                              text: "Λάρισα............................\nΑριθ.Πρωτ......................\n",
-                            },
-                            "Προς το Ληξιαρχείο ΔΕ Λαρισαίων\n\n\n\n",
-                          ],
-                        },
-                      ],
-                    },
-                    {
-                      columns: [
-                        {
-                          width: 300,
-                          style: "spreadLine",
-                          text: [
-                            `Επώνυμο πατέρα: `,
-                            {
-                              color: "#00f",
-                              text: `${
-                                values?.father?.lastName
-                                  ? values?.father?.lastName
-                                  : "____________________________________"
-                              }`,
-                            },
-                            `\nΌνομα πατέρα: `,
-                            {
-                              color: "#00f",
-                              text: `${
-                                values?.father?.firstName
-                                  ? values?.father?.firstName
-                                  : "_______________________________________"
-                              }`,
-                            },
-                            `\nΑ.Δ.Τ.: `,
-                            {
-                              color: "#00f",
-                              text: `${
-                                values?.father?.ssn
-                                  ? values?.father?.ssn
-                                  : "________________________________________________"
-                              }`,
-                            },
-                            `\n\nΕπώνυμο μητέρας: `,
-                            {
-                              color: "#00f",
-                              text: `${
-                                values?.mother?.lastName
-                                  ? values?.mother?.lastName
-                                  : "___________________________________"
-                              }`,
-                            },
-                            `\nΌνομα μητέρας: `,
-                            {
-                              color: "#00f",
-                              text: `${
-                                values?.mother?.firstName
-                                  ? values?.mother?.firstName
-                                  : "______________________________________"
-                              }`,
-                            },
-                            `\nΑ.Δ.Τ.: `,
-                            {
-                              color: "#00f",
-                              text: `${
-                                values?.mother?.ssn
-                                  ? values?.mother?.ssn
-                                  : "________________________________________________"
-                              }`,
-                            },
-                          ],
-                        },
-                        {
-                          width: "*",
-                          text: [
-                            "Σας παρακαλώ να προβείτε σε\nκαταχώρηση του ονόματος του\nτέκνου μας, που γεννήθηκε στη\nΛάρισα στις:\n\n\nΜε αριθμ. Ληξ. Πράξης γεν:\n\n\n",
-                            {
-                              decoration: "underline",
-                              text: "Με το όνομα:\n\n",
-                            },
-                            {
-                              text: "____________________________________\n____________________________________\n____________________________________",
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                    {
-                      decoration: "underline",
-                      text: "\n\nΚατοικία\n\n",
-                    },
-                    {
-                      style: "spreadLine",
-                      text: [
-                        `Πόλη: `,
-                        {
-                          color: "#00f",
-                          text: `${
-                            values?.residency?.city
-                              ? values?.residency?.city
-                              : "_______________________________________________"
-                          }`,
-                        },
-                        `\nΔιεύθυνση: `,
-                        {
-                          color: "#00f",
-                          text: `${
-                            values?.residency?.address
-                              ? values?.residency?.address
-                              : "__________________________________________\n______________________________________________________"
-                          }`,
-                        },
-                        `\nΤηλέφωνο: `,
-                        {
-                          color: "#00f",
-                          text: `${
-                            values?.residency?.phone
-                              ? values?.residency?.phone
-                              : "___________________________________________"
-                          }`,
-                        },
-                        `\n\n\n\n\n`,
-                      ],
-                    },
-                    {
-                      columns: [
-                        {},
-                        {},
-                        {
-                          text: [
-                            {
-                              style: "subheader",
-                              alignment: "center",
-                              text: "Οι αιτούντες\n\n\n",
-                            },
-                            "Ο πατέρας\n\n\n\n\nΗ μητέρα",
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                  styles: {
-                    header: {
-                      fontSize: 18,
-                      bold: true,
-                    },
-                    subheader: {
-                      fontSize: 15,
-                      bold: true,
-                    },
-                    bigger: {
-                      fontSize: 15,
-                      italics: true,
-                    },
-                    spreadLine: {
-                      lineHeight: 1.5,
-                    },
-                  },
-                  defaultStyle: {
-                    columnGap: 20,
-                  },
-                })
-                .open();
-            }}
-          >
-            Export as PDF
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => handleDeleteForm(true)}
-          >
-            Delete Form
-          </Button>
-        </ButtonGroup>
-      </Box>
-      <form>
-        <Box sx={{ justifyContent: "flex-start" }}>
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((step) => (
-              <Step key={step.label}>
-                <StepLabel>{step.label}</StepLabel>
-                <StepContent style={{ textAlign: "-webkit-center" }}>
-                  {visibleForm(activeStep)}
-                  {activeStep === 2 && (
-                    <Alert color="warning" sx={{ m: 2, maxWidth: 400 }}>
-                      <AlertTitle>
-                        Are you sure you want to updated it?
-                      </AlertTitle>
-                      This is a form created by a refugee.
-                    </Alert>
-                  )}
-                  <Box sx={{ display: "flex", maxWidth: "500px", p: 1, mt: 2 }}>
-                    <Button
-                      color="secondary"
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      variant="contained"
-                      startIcon={<ArrowBackIosNewIcon />}
-                    >
-                      Back
-                    </Button>
-                    <Box sx={{ flex: "1 0 auto" }} />
-                    {activeStep !== 2 ? (
-                      <Button
-                        onClick={handleNext}
-                        variant="contained"
-                        endIcon={<ArrowForwardIosIcon />}
-                      >
-                        Next
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={handleSubmit((data) => onSubmit(data, true))}
-                        variant="contained"
-                      >
-                        Submit
-                      </Button>
+      {console.log(notFound)}
+      {notFound ? (
+        <Alert color="warning">Form Not Found</Alert>
+      ) : (
+        <form>
+          <Box sx={{ justifyContent: "flex-start" }}>
+            <Stepper activeStep={activeStep} orientation="vertical">
+              {steps.map((step) => (
+                <Step key={step.label}>
+                  <StepLabel>{step.label}</StepLabel>
+                  <StepContent style={{ textAlign: "-webkit-center" }}>
+                    {visibleForm(activeStep)}
+                    {activeStep === 2 && user.role !== "refugee" && (
+                      <Alert color="warning" sx={{ m: 2, maxWidth: 400 }}>
+                        <AlertTitle>
+                          Are you sure you want to updated it?
+                        </AlertTitle>
+                        This is a form created by a refugee.
+                      </Alert>
                     )}
-                  </Box>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-        </Box>
-      </form>
+                    <Box
+                      sx={{ display: "flex", maxWidth: "500px", p: 1, mt: 2 }}
+                    >
+                      <Button
+                        color="secondary"
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        variant="contained"
+                        startIcon={<ArrowBackIosNewIcon />}
+                      >
+                        Back
+                      </Button>
+                      <Box sx={{ flex: "1 0 auto" }} />
+                      {activeStep !== 2 ? (
+                        <Button
+                          onClick={handleNext}
+                          variant="contained"
+                          endIcon={<ArrowForwardIosIcon />}
+                        >
+                          Next
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={handleSubmit((data) => onSubmit(data, true))}
+                          variant="contained"
+                        >
+                          Submit
+                        </Button>
+                      )}
+                    </Box>
+                  </StepContent>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+        </form>
+      )}
     </Container>
   );
 };
