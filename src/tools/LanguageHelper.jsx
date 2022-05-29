@@ -36,6 +36,9 @@ const LanguageHelper = () => {
               <WordPlayer word="γέννηση" lang="eng" />
               <WordPlayer word="μωρό" lang="eng" />
               <WordPlayer word="παιδί" lang="eng" />
+              <WordPlayer word="αίτηση" lang="eng" />
+              <WordPlayer word="ληξιαρχείο" lang="eng" />
+              <WordPlayer word="αντίγραφο" lang="eng" />
               <Box sx={{ color: 'darkgray', fontStyle: 'italic' }}>
                 <Typography style={{ textAlign: 'right' }}>Powered by EasyRights</Typography>
               </Box>
