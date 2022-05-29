@@ -291,8 +291,8 @@ const TopNav = () => {
                 </Box>
 
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                  <NativeSelect
-                    defaultValue='gr'
+                  {user?.role !== 'municipality' && <NativeSelect
+                    defaultValue={lang || 'gr'}
                     inputProps={{
                       name: 'lang',
                       id: 'lang',
@@ -302,7 +302,7 @@ const TopNav = () => {
                   >
                     <option value='gr'>Ελληνικα</option>
                     <option value='en'>English</option>
-                  </NativeSelect>
+                  </NativeSelect>}
                   <Tooltip title={user?.role === "municipality" ? 'Ρυθμισεις' : "Open settings"}>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
@@ -387,23 +387,38 @@ const TopNav = () => {
                 </Box>
               </>
             ) : (
-              <Link
-                to={user ? "/" : "/login"}
-                style={{ textDecoration: "none" }}
-              >
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{
-                    mr: 2,
-                    color: "secondary.light",
-                    fontWeight: 600,
-                  }}
+
+              <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                <Link
+                  to={user ? "/" : "/login"}
+                  style={{ textDecoration: "none" }}
                 >
-                  Roob.
-                </Typography>
-              </Link>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{
+                      mr: 2,
+                      color: "secondary.light",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Roob.
+                  </Typography>
+                </Link>
+                {user?.role !== 'municipality' && <NativeSelect
+                  defaultValue={lang || 'gr'}
+                  inputProps={{
+                    name: 'lang',
+                    id: 'lang',
+                  }}
+                  onChange={(event) => dispatch(setLangAction(event.target.value))}
+                  sx={{color: 'white', borderColor: 'white'}}
+                >
+                  <option value='gr'>Ελληνικα</option>
+                  <option value='en'>English</option>
+                </NativeSelect>}
+              </Box>
             )}
           </Toolbar>
         </Container>

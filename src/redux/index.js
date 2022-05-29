@@ -10,7 +10,7 @@ const composeThatAlwaysWorks =
 export const initialState = {
   loggedIn: false,
   user: null,
-  lang: 'gr'
+  lang: localStorage.getItem('lang') || 'gr'
 };
 
 const bigReducer = combineReducers({

@@ -24,6 +24,7 @@ import { setLoggedInAction } from "./redux/actions/loggedIn";
 import refreshToken from "./api/post/refreshToken";
 import Loading from "./tools/Loading";
 import LanguageHelper from "./tools/LanguageHelper";
+import { setLangAction } from "./redux/actions/lang";
 
 const App = () => {
   const { height } = useWindowDimentions();
@@ -31,6 +32,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
   const getUser = async (retry) => {
@@ -57,6 +59,10 @@ const App = () => {
   };
 
   useEffect(() => void getUser(true), []);
+  
+  useEffect(() => localStorage.setItem('lang', lang), [lang]);
+
+  useEffect(() => !user || user?.role === 'municipality' && dispatch(setLangAction('gr')), [user]);
 
   if (loading) return <Loading />;
 

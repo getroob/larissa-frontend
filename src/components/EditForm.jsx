@@ -279,7 +279,6 @@ const MunicipalityForm = () => {
 
   return (
     <Container component="main">
-      {console.log(notFound)}
       {notFound ? (
         <Alert color="warning">{user?.role === "municipality" || lang === 'gr' ? 'Η φορμα δεν βρεθηκε' : 'Form Not Found'}</Alert>
       ) : (
