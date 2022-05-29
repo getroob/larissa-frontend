@@ -31,19 +31,6 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import deleteForm from "../api/delete/deleteForm";
 
-const columns = [
-  // {
-  //   id: "status",
-  //   label: "Κατάσταση",
-  //   minWidth: 170,
-  // },
-  // { id: "childFullName", label: "Όνομα Παιδίου", minWidth: 170 },
-  { id: "fatherFullName", label: "Όνομα Πατέρα", minWidth: 100 },
-  { id: "motherFullName", label: "Όνομα Μητέρας" },
-  { id: "phone", label: "Τηλεφωνο", minWidth: 100 },
-  { id: "options", label: "Αλλο", minWidth: 100 },
-];
-
 const DetailsList = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -53,7 +40,23 @@ const DetailsList = (props) => {
   const [refugees, setRefugees] = useState([]);
   const [refugeeId, setRefugeeId] = useState("");
   const [openModal, setOpenModal] = useState(false);
-
+  
+  const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
+  
+  const columns = [
+    // {
+    //   id: "status",
+    //   label: "Κατάσταση",
+    //   minWidth: 170,
+    // },
+    // { id: "childFullName", label: "Όνομα Παιδίου", minWidth: 170 },
+    { id: "fatherFullName", label: lang === 'gr' ? "Όνομα Πατέρα" : 'Father Name', minWidth: 100 },
+    { id: "motherFullName", label: lang === 'gr' ? "Όνομα Μητέρας" : 'Mother Name' },
+    { id: "phone", label: lang === 'gr' ? "Τηλεφωνο" : 'Phone', minWidth: 100 },
+    { id: "options", label: lang === 'gr' ? "Αλλο" : 'Other', minWidth: 100 },
+  ];
+  
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
   const handlePopup = (bool) => {
@@ -126,7 +129,11 @@ const DetailsList = (props) => {
     try {
       await deleteForm(formId);
       handleModal(false);
-      window.location.replace(user?.role === "refugee" ? "/preperation" : "/");
+      window.location.replace(user?.role === "refugee" ? 
+        "/preperation" : 
+        forms?.find(f => f?.id === formId)?.createdBy === "refugee"
+          ? "/preparedForms"
+          : "/");
     } catch (error) {
       if (retry) {
         try {
@@ -169,8 +176,6 @@ const DetailsList = (props) => {
     }
   };
 
-  const user = useSelector((state) => state.user);
-
   useEffect(() => {
     if (!user) window.location.href = "/login";
   }, [user]);
@@ -186,12 +191,12 @@ const DetailsList = (props) => {
     <Container>
       {props.type === "preparedForms" ? (
         <Typography component="h5" variant="h5" sx={{ mb: 4 }}>
-          Φορμες Προσφυγων
+          {user?.role === "municipality" || lang === 'gr' ? 'Φορμες Προσφυγων' : 'Refugee Forms'}
         </Typography>
       ) : (
         props.type === "municipalityForms" && (
           <Typography component="h5" variant="h5" sx={{ mb: 4 }}>
-            Φορμες Ληξιαρχειου
+            {user?.role === "municipality" || lang === 'gr' ? 'Φορμες Ληξιαρχειου' : 'Municipality Forms'}
           </Typography>
         )
       )}
@@ -208,8 +213,8 @@ const DetailsList = (props) => {
             }
           >
             {rows.length >= 2 && user?.role === "refugee"
-              ? "Max forms allowed: 2"
-              : "Add Form"}
+              ? lang === 'gr' ? "Max forms allowed: 2" : 'Μεγιστος αριθμος φορμων: 2'
+              : user?.role === "municipality" || lang === 'gr' ? 'Νεα Φορμα' : "Add Form" }
           </Button>
         </Grid>
       )}
@@ -278,7 +283,7 @@ const DetailsList = (props) => {
                                     window.location.replace(`/forms/${row.id}`)
                                   }
                                 >
-                                  Edit
+                                  {lang === 'gr' ? 'Επεξεργασια' : 'Edit'}
                                 </Button>
                                 <Button
                                   variant="outlined"
@@ -477,7 +482,7 @@ const DetailsList = (props) => {
                                   size="small"
                                   onClick={() => setOpenModal(row.id)}
                                 >
-                                  Delete
+                                  {lang === 'gr' ? 'Διαγραφη' : 'Delete'}
                                 </Button>
                               </ButtonGroup>
                             ) : (
@@ -499,6 +504,8 @@ const DetailsList = (props) => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          labelDisplayedRows={({ from, to, count }) => { return `${from}–${to} ${lang === 'gr' ? 'απο' : 'from'} ${count !== -1 ? count : `${lang === 'gr' ? 'περισσοτερο απο' : 'more than'} ${to}`}`}}
+          labelRowsPerPage={user?.role === "municipality" || lang === 'gr' ? 'Φορμες ανα σελιδα:' : 'Rows per page:'}
         />
       </Paper>
       <Dialog
@@ -508,11 +515,17 @@ const DetailsList = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Are you sure you want to delete this form?
+          {user?.role === "municipality" || lang === 'gr' ?
+            'Θελετε σιγουρα να διαγραψετε αυτην την φορμα;' :
+            'Are you sure you want to delete this form?' 
+          }
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This action cannot be undone
+            {user?.role === "municipality" || lang === 'gr' ? 
+              'Αυτη η επιλογη δεν μπορει να αναιρεθει αργοτερα' :
+              'This action cannot be undone'
+            }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -521,7 +534,10 @@ const DetailsList = (props) => {
             color="success"
             onClick={() => handleModal(false)}
           >
-            Cancel
+            {user?.role === "municipality" || lang === 'gr' ?
+              'Ακυρωση' :
+              'Cancel'
+            }
           </Button>
           <Button
             variant="outlined"
@@ -529,7 +545,10 @@ const DetailsList = (props) => {
             onClick={() => handleDeleteForm(true, openModal)}
             autoFocus
           >
-            Delete
+            {user?.role === "municipality" || lang === 'gr' ?
+              'Διαγραφη' :
+              'Delete'
+            }
           </Button>
         </DialogActions>
       </Dialog>

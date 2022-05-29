@@ -85,6 +85,7 @@ const Appointment = () => {
   // };
 
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
 
   useEffect(() => {
     if (!user) window.location.href = "/login";
@@ -99,9 +100,10 @@ const Appointment = () => {
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Alert color="warning" sx={{ mb: 4 }}>
-        θα πρέπει να έχει μαζί σας κάποιο επίσημο έγγραφο ταυτοπροσωπίας, τόσο
-        εσεις, όσο και ο επίσημος μεταφραστής ή κοινωνικός λειτουργός που θα σας
-        συνοδεύει.
+        {lang === 'gr' ? 
+          'Θα πρέπει να έχετε μαζί σας κάποιο επίσημο έγγραφο ταυτοπροσωπίας, τόσο εσεις, όσο και ο επίσημος μεταφραστής ή κοινωνικός λειτουργός που θα σας συνοδεύει.' : 
+          'You must have an official identity document with you, as well as the official translator or social worker who will accompany you.'
+        }
       </Alert>
       <Typography
         variant="h5"
@@ -109,14 +111,17 @@ const Appointment = () => {
         component="div"
         sx={{ textAlign: "center" }}
       >
-        To schedule your appointment please call the registry office
+        {lang === 'gr' ? 
+          'Για να προγραμματίσετε το ραντεβού σας, καλέστε το ληξιαρχείο στο (+30) 2413500254' : 
+          'To schedule your appointment please call the registry office at (+30)2413500254'
+        }
       </Typography>
       <Button variant="contained">
         <a
           href="tel:+30 2413500254"
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          Call
+          {lang === 'gr' ? 'Κληση' : 'Call'}
         </a>
       </Button>
       {/* {forms.length > 0 ? (

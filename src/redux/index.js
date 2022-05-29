@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import langReducer from "./reducers/langReducer";
 import loggedInReducer from "./reducers/loggedInReducer";
 import userReducer from "./reducers/userReducer";
 
@@ -9,11 +10,13 @@ const composeThatAlwaysWorks =
 export const initialState = {
   loggedIn: false,
   user: null,
+  lang: 'gr'
 };
 
 const bigReducer = combineReducers({
   loggedIn: loggedInReducer,
   user: userReducer,
+  lang: langReducer,
 });
 
 const configureStore = createStore(

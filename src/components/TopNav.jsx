@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import HideOnScroll from "../tools/HideOnScroll";
-import { Divider } from "@mui/material";
+import { Divider, NativeSelect } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
 import { Settings } from "@mui/icons-material";
@@ -23,9 +23,11 @@ import { Logout } from "@mui/icons-material";
 
 import logoutUser from "../api/post/logoutUser";
 import { setUserAction } from "../redux/actions/user";
+import { setLangAction } from "../redux/actions/lang";
 
 const TopNav = () => {
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -112,7 +114,7 @@ const TopNav = () => {
                       display: { xs: "block", md: "none" },
                     }}
                   >
-                    {user.role === "municipality" ? (
+                    {user?.role === "municipality" ? (
                       <>
                         <Link
                           to="/preparedForms"
@@ -120,7 +122,7 @@ const TopNav = () => {
                         >
                           <MenuItem key="Forms" onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
-                              Prepared Forms
+                              Φορμες Προσφυγων
                             </Typography>
                           </MenuItem>
                         </Link>
@@ -130,7 +132,7 @@ const TopNav = () => {
                         >
                           <MenuItem key="Forms" onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
-                              Municipality Forms
+                              Φορμες Ληξιαρχειου
                             </Typography>
                           </MenuItem>
                         </Link>
@@ -159,7 +161,7 @@ const TopNav = () => {
                             onClick={handleCloseNavMenu}
                           >
                             <Typography textAlign="center">
-                              Preperation
+                              {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
                             </Typography>
                           </MenuItem>
                         </Link>
@@ -185,7 +187,7 @@ const TopNav = () => {
                             onClick={handleCloseNavMenu}
                           >
                             <Typography textAlign="center">
-                              Appointments
+                              {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
                             </Typography>
                           </MenuItem>
                         </Link>
@@ -207,7 +209,7 @@ const TopNav = () => {
                   Roob.
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  {user.role === "municipality" ? (
+                  {user?.role === "municipality" ? (
                     <>
                       <Link
                         to="/preparedForms"
@@ -218,7 +220,7 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: "white", display: "block" }}
                         >
-                          Prepared Forms
+                          Φορμες Προσφυγων
                         </Button>
                       </Link>
                       <Link
@@ -230,7 +232,7 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: "white", display: "block" }}
                         >
-                          Municipality Forms
+                          Φορμες Ληξιαρχειου
                         </Button>
                       </Link>
                       {/* <Link
@@ -257,7 +259,7 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: "white", display: "block" }}
                         >
-                          Preperation
+                          {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
                         </Button>
                       </Link>
                       {/* <Link
@@ -281,15 +283,27 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: "white", display: "block" }}
                         >
-                          Appointments
+                          {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
                         </Button>
                       </Link>
                     </>
                   )}
                 </Box>
 
-                <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Open settings">
+                <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                  <NativeSelect
+                    defaultValue='gr'
+                    inputProps={{
+                      name: 'lang',
+                      id: 'lang',
+                    }}
+                    onChange={(event) => dispatch(setLangAction(event.target.value))}
+                    sx={{color: 'white', borderColor: 'white'}}
+                  >
+                    <option value='gr'>Ελληνικα</option>
+                    <option value='en'>English</option>
+                  </NativeSelect>
+                  <Tooltip title={user?.role === "municipality" ? 'Ρυθμισεις' : "Open settings"}>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
                         alt="Remy Sharp"
@@ -367,7 +381,7 @@ const TopNav = () => {
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
-                      Logout
+                      {user?.role === "municipality" || lang === 'gr' ? 'Αποσυνδεση' : 'Logout'}
                     </MenuItem>
                   </Menu>
                 </Box>

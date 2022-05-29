@@ -30,6 +30,7 @@ const App = () => {
 
   const [loading, setLoading] = useState(true);
 
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const getUser = async (retry) => {
@@ -115,7 +116,7 @@ const App = () => {
         </Box>
       </Router>
       {/* <Footer /> */}
-      <LanguageHelper />
+      {user?.role !== "municipality" && <LanguageHelper />}
     </Container>
   );
 };

@@ -38,7 +38,10 @@ import deleteForm from "../api/delete/deleteForm";
 
 const MunicipalityForm = () => {
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
+
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
   const [createdBy, setCreatedBy] = useState("");
   const [notFound, setNotFound] = useState(false);
 
@@ -246,7 +249,7 @@ const MunicipalityForm = () => {
     try {
       await updateForm(data);
       window.location.replace(
-        user.role === "refugee"
+        user?.role === "refugee"
           ? data?.createdBy === "refugee"
             ? "/preperation"
             : "/"
@@ -278,7 +281,7 @@ const MunicipalityForm = () => {
     <Container component="main">
       {console.log(notFound)}
       {notFound ? (
-        <Alert color="warning">Form Not Found</Alert>
+        <Alert color="warning">{user?.role === "municipality" || lang === 'gr' ? 'Η φορμα δεν βρεθηκε' : 'Form Not Found'}</Alert>
       ) : (
         <form>
           <Box sx={{ justifyContent: "flex-start" }}>
@@ -288,12 +291,12 @@ const MunicipalityForm = () => {
                   <StepLabel>{step.label}</StepLabel>
                   <StepContent style={{ textAlign: "-webkit-center" }}>
                     {visibleForm(activeStep)}
-                    {activeStep === 2 && user.role !== "refugee" && (
+                    {activeStep === 2 && user?.role !== "refugee" && createdBy === "refugee" && (
                       <Alert color="warning" sx={{ m: 2, maxWidth: 400 }}>
                         <AlertTitle>
-                          Are you sure you want to updated it?
+                          {user?.role === "municipality" || lang === 'gr' ? 'Θελετε σιγουρα να αλλαξετε αυτη την φορμα' : 'Are you sure you want to updated it?'}
                         </AlertTitle>
-                        This is a form created by a refugee.
+                        {user?.role === "municipality" || lang === 'gr' ? 'Αυτη η φορμα δημιουργηθηκε απο προσφυγα' :'This is a form created by a refugee.'}
                       </Alert>
                     )}
                     <Box
@@ -306,7 +309,7 @@ const MunicipalityForm = () => {
                         variant="contained"
                         startIcon={<ArrowBackIosNewIcon />}
                       >
-                        Back
+                        {user?.role === "municipality" || lang === 'gr' ? 'Πισω' :'Back'}
                       </Button>
                       <Box sx={{ flex: "1 0 auto" }} />
                       {activeStep !== 2 ? (
@@ -315,14 +318,14 @@ const MunicipalityForm = () => {
                           variant="contained"
                           endIcon={<ArrowForwardIosIcon />}
                         >
-                          Next
+                          {user?.role === "municipality" || lang === 'gr' ? 'Επομενο' : 'Next'}
                         </Button>
                       ) : (
                         <Button
                           onClick={handleSubmit((data) => onSubmit(data, true))}
                           variant="contained"
                         >
-                          Submit
+                          {user?.role === "municipality" || lang === 'gr' ? 'Καταχωριση' :'Submit'}
                         </Button>
                       )}
                     </Box>

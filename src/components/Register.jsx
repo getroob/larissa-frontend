@@ -15,6 +15,7 @@ const Register = () => {
   const [error, setError] = useState(null);
 
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
@@ -61,7 +62,7 @@ const Register = () => {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
-          Sign up
+          {lang === 'gr' ? 'Εγγραφη' : 'Sign up'}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -73,7 +74,7 @@ const Register = () => {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label={lang === 'gr' ? 'Ονομα' : "First Name"}
                 autoFocus
               />
             </Grid>
@@ -82,7 +83,7 @@ const Register = () => {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label={lang === 'gr' ? 'Επωνυμο' : "Last Name"}
                 name="lastName"
                 type="text"
                 autoComplete="family-name"
@@ -94,7 +95,7 @@ const Register = () => {
                 fullWidth
                 error={Boolean(error)}
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -106,7 +107,7 @@ const Register = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label={lang === 'gr' ? 'Κωδικος' : "Password"}
                 type="password"
                 id="password"
                 autoComplete="new-password"
@@ -130,12 +131,12 @@ const Register = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2, color: "secondary.light" }}
           >
-            Sign Up
+            {lang === 'gr' ? 'Εγγραφη' : "Sign Up"}
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
-                Already have an account? Sign in
+                {lang === 'gr' ? 'Εχετε ηδη λογαριασμο; Συνδεθειτε' : 'Already have an account? Sign in'}
               </Link>
             </Grid>
           </Grid>

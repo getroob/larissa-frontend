@@ -16,6 +16,7 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
@@ -60,7 +61,7 @@ const Login = () => {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
-          Sign in
+          {lang === 'gr' ? 'Συνδεση' : 'Sign in'}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -69,7 +70,7 @@ const Login = () => {
             fullWidth
             error={Boolean(error)}
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -80,7 +81,7 @@ const Login = () => {
             fullWidth
             error={Boolean(error)}
             name="password"
-            label="Password"
+            label={lang === 'gr' ? 'Κωδικος' : "Password"}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -97,17 +98,17 @@ const Login = () => {
               color: "secondary.light",
             }}
           >
-            Sign In
+            {lang === 'gr' ? 'Συνδεση' : 'Sign In'}
           </Button>
           <Grid container>
-            <Grid item xs>
+            {/* <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {lang === 'gr' ? 'Δεν εχετε λογαριασμο; Εγγραφειτε' : "Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

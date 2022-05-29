@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
 
   useEffect(() => {
-    user.role === "municipality"
+    user?.role === "municipality"
       ? window.location.replace("/municipalityForms")
       : window.location.replace("/preperation");
   }, []);
@@ -14,7 +15,7 @@ const Home = () => {
     if (!user) window.location.href = "/login";
   }, [user]);
 
-  return <div>Redirecting...</div>;
+  return <div>{user?.role === "municipality" || lang === 'gr' ? 'Ανακατευθυνση...' : 'Redirecting...'}</div>;
 };
 
 export default Home;

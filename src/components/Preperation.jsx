@@ -5,6 +5,7 @@ import DetailsList from "./DetailsList";
 
 const Preperation = () => {
   const user = useSelector((state) => state.user);
+  const lang = useSelector((state) => state.lang);
 
   useEffect(() => {
     if (!user) window.location.href = "/login";
@@ -12,7 +13,7 @@ const Preperation = () => {
 
   return (
     <div className="m-5">
-      <h2>Πληροφοριες σχετικα με την διαδικασια</h2>
+      <h2>{lang === 'gr' ? 'Πληροφοριες σχετικα με την διαδικασια' : 'Information about the process'}</h2>
       <ListGroup>
         <ListGroup.Item>
           {/* <a
@@ -27,7 +28,7 @@ const Preperation = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Γενικες οδηγιες
+            {lang === 'gr' ? 'Γενικες οδηγιες' : 'General Instructions'}
           </a>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -36,7 +37,7 @@ const Preperation = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Παραδειγμα πιστοποιητικου γεννησης
+            {lang === 'gr' ? 'Παραδειγμα πιστοποιητικου γεννησης' : 'Birth certificate example'}
           </a>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -45,7 +46,7 @@ const Preperation = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Οδηγιες δηλωσεις γεννησεων
+            {lang === 'gr' ? 'Οδηγιες δηλωσεις γεννησεων' : 'Instructions for birth declarations'}
           </a>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -54,7 +55,7 @@ const Preperation = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Οδηγιες ονοματοδοσιας
+            {lang === 'gr' ? 'Οδηγιες ονοματοδοσιας' : 'Naming instructions'}
           </a>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -63,11 +64,11 @@ const Preperation = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Παραδειγμα αιτησης ονοματοδοσιας
+            {lang === 'gr' ? 'Παραδειγμα αιτησης ονοματοδοσιας' : 'Example of a naming application'}
           </a>
         </ListGroup.Item>
       </ListGroup>
-      <h3 className="mt-5">Προετοιμασια αιτησης ονοματοδοσιας</h3>
+      <h3 className="mt-5">{lang === 'gr' ? 'Προετοιμασια αιτησης ονοματοδοσιας' : 'Naming application preparation'}</h3>
       <DetailsList type="preperation" />
     </div>
   );

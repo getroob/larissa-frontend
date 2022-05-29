@@ -1,8 +1,11 @@
 import React from "react";
 import { Controller } from "react-hook-form";
 import { Grid, TextField } from "@mui/material";
+import { useSelector } from 'react-redux';
 
 const ResidencyForm = ({ isWritable, control }) => {
+  const lang = useSelector((state) => state.lang);
+
   return (
     <Grid
       container
@@ -16,7 +19,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Πόλη"
+              label={lang === 'gr' ? "Πόλη" : 'City'}
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -32,7 +35,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Διευθυνση"
+              label={lang === 'gr' ? "Διευθυνση" : 'Address'}
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -48,7 +51,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Τηλεφωνο"
+              label={lang === 'gr' ? "Τηλεφωνο" : 'Phone'}
               variant="outlined"
               value={value}
               onChange={onChange}
