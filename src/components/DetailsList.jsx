@@ -168,8 +168,8 @@ const DetailsList = (props) => {
     'ΤΗΛΕΦΩΝΟ',
   ];
   const csvRows =
-    Object.keys(forms).length !== 0
-      ? Object.keys(forms).map((p) => [
+    forms.length !== 0
+      ? forms.map((p) => [
           rows[p].father.firstName,
           rows[p].father.lastName,
           rows[p].mother.firstName,
