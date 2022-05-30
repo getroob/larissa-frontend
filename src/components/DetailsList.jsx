@@ -158,7 +158,7 @@ const DetailsList = (props) => {
   };
 
   const csvHeaders = columns.map((p) => p.label);
-  const csvRows = rows.length ? rows : ['ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ'];
+  const csvRows = rows.length ? Object.values(rows) : ['ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ'];
 
   const addForm = async (retry) => {
     try {
