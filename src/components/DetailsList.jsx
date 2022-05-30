@@ -161,8 +161,10 @@ const DetailsList = (props) => {
   const csvHeaders = [
     'ΟΝΟΜΑ ΠΑΤΕΡΑ',
     'ΕΠΙΘΕΤΟ ΠΑΤΕΡΑ',
+    'ΑΔΤ ΠΑΤΕΡΑ',
     'ΟΝΟΜΑ ΜΗΤΕΡΑΣ',
     'ΕΠΙΘΕΤΟ ΜΗΤΕΡΑΣ',
+    'ΑΔΤ ΜΗΤΕΡΑΣ',
     'ΠΟΛΗ ΚΑΤΟΙΚΙΑΣ',
     'ΔΙΕΥΘΥΝΣΗ ΚΑΤΟΙΚΙΑΣ',
     'ΤΗΛΕΦΩΝΟ',
@@ -172,8 +174,10 @@ const DetailsList = (props) => {
       ? forms.map((p) => [
           p.father.firstName,
           p.father.lastName,
+          p.father.ssn,
           p.mother.firstName,
           p.mother.lastName,
+          p.mother.ssn,
           p.residency.city,
           p.residency.address,
           p.residency.phone,
@@ -228,7 +232,7 @@ const DetailsList = (props) => {
         <Grid sx={{ display: 'flex', justifyContent: 'flex-end', my: 2 }}>
           {user?.role === 'municipality' && (
             <div>
-              <Button variant="contained" onClick={() => clickCsv()}>
+              <Button variant="outlined" onClick={() => clickCsv()} sx={{mx: 3}}>
                 {lang === 'gr' ? 'Ληψη Backup' : 'Download Backup'}
               </Button>
               <CSVLink
