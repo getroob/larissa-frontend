@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -45,6 +45,7 @@ const DetailsList = (props) => {
 
   const user = useSelector((state) => state.user);
   const lang = useSelector((state) => state.lang);
+  const csvLink = useRef();
 
   const columns = [
     // {
@@ -160,6 +161,10 @@ const DetailsList = (props) => {
   const csvHeaders = columns.filter((p) => p.id !== 'options').map((p) => p.label);
   const csvRows = Object.keys(rows).length !== 0 ? Object.values(rows) : 'ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ';
 
+  const clickCsv = () => {
+    csvLink.current.link.click();
+  };
+
   const addForm = async (retry) => {
     try {
       const response = await createForm(refugeeId);
@@ -204,8 +209,15 @@ const DetailsList = (props) => {
         <Grid sx={{ display: 'flex', justifyContent: 'flex-end', my: 2 }}>
           {user?.role === 'municipality' && (
             <div>
-              <Button variant="contained">{lang === 'gr' ? 'Λήψη Backup' : 'Download Backup'}</Button>
-              <CSVLink data={csvRows} headers={csvHeaders} className="hidden" separator={';'} filename={'backup_data.csv'} />
+              <Button variant="contained">{lang === 'gr' ? 'Ληψη Backup' : 'Download Backup'}</Button>
+              <CSVLink
+                ref={csvLink}
+                data={csvRows}
+                headers={csvHeaders}
+                className="hidden"
+                separator={';'}
+                filename={'backup_data.csv'}
+              />
             </div>
           )}
           <Button
