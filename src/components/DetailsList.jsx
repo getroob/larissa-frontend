@@ -161,10 +161,11 @@ const DetailsList = (props) => {
   const csvHeaders = columns.filter((p) => p.id !== 'options').map((p) => p.label);
   const csvRows =
     Object.keys(rows).length !== 0
-      ? () => {
-          console.log(Object.values(rows), rows);
-          return Object.values(rows);
-        }
+      ? Object.keys(rows).map((p) =>
+          Object.keys(rows[p])
+            .filter((i) => i !== 'id')
+            .map((e) => rows[p][e])
+        )
       : 'ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ';
 
   const clickCsv = () => {
