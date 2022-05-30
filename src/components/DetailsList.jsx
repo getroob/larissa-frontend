@@ -203,11 +203,10 @@ const DetailsList = (props) => {
       {props.type !== 'validateForms' && props.type !== 'preparedForms' && (
         <Grid sx={{ display: 'flex', justifyContent: 'flex-end', my: 2 }}>
           {user?.role === 'municipality' && (
-            <Button variant="contained">
-              <CSVLink data={csvRows} headers={csvHeaders} filename={'backup_data.csv'}>
-                {lang === 'gr' ? 'Λήψη Backup' : 'Download Backup'}
-              </CSVLink>
-            </Button>
+            <div>
+              <Button variant="contained">{lang === 'gr' ? 'Λήψη Backup' : 'Download Backup'}</Button>
+              <CSVLink data={csvRows} headers={csvHeaders} className="hidden" separator={';'} filename={'backup_data.csv'} />
+            </div>
           )}
           <Button
             variant="contained"
