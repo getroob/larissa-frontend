@@ -159,7 +159,13 @@ const DetailsList = (props) => {
   };
 
   const csvHeaders = columns.filter((p) => p.id !== 'options').map((p) => p.label);
-  const csvRows = Object.keys(rows).length !== 0 ? Object.values(rows) : 'ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ';
+  const csvRows =
+    Object.keys(rows).length !== 0
+      ? () => {
+          console.log(Object.values(rows), rows);
+          return Object.values(rows);
+        }
+      : 'ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ';
 
   const clickCsv = () => {
     csvLink.current.link.click();
