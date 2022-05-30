@@ -170,13 +170,13 @@ const DetailsList = (props) => {
   const csvRows =
     forms.length !== 0
       ? forms.map((p) => [
-          rows[p].father.firstName,
-          rows[p].father.lastName,
-          rows[p].mother.firstName,
-          rows[p].mother.lastName,
-          rows[p].residency.city,
-          rows[p].residency.address,
-          rows[p].residency.phone,
+          p.father.firstName,
+          p.father.lastName,
+          p.mother.firstName,
+          p.mother.lastName,
+          p.residency.city,
+          p.residency.address,
+          p.residency.phone,
         ])
       : 'ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ';
 
