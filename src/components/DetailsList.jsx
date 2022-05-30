@@ -158,14 +158,26 @@ const DetailsList = (props) => {
     setPage(0);
   };
 
-  const csvHeaders = columns.filter((p) => p.id !== 'options').map((p) => p.label);
+  const csvHeaders = [
+    'ΟΝΟΜΑ ΠΑΤΕΡΑ',
+    'ΕΠΙΘΕΤΟ ΠΑΤΕΡΑ',
+    'ΟΝΟΜΑ ΜΗΤΕΡΑΣ',
+    'ΕΠΙΘΕΤΟ ΜΗΤΕΡΑΣ',
+    'ΠΟΛΗ ΚΑΤΟΙΚΙΑΣ',
+    'ΔΙΕΥΘΥΝΣΗ ΚΑΤΟΙΚΙΑΣ',
+    'ΤΗΛΕΦΩΝΟ',
+  ];
   const csvRows =
-    Object.keys(rows).length !== 0
-      ? Object.keys(rows).map((p) =>
-          Object.keys(rows[p])
-            .filter((i) => i !== 'id')
-            .map((e) => rows[p][e])
-        )
+    Object.keys(forms).length !== 0
+      ? Object.keys(forms).map((p) => [
+          rows[p].father.firstName,
+          rows[p].father.lastName,
+          rows[p].mother.firstName,
+          rows[p].mother.lastName,
+          rows[p].residency.city,
+          rows[p].residency.address,
+          rows[p].residency.phone,
+        ])
       : 'ΔΕΝ ΥΠΑΡΧΟΥΝ ΣΤΟΙΧΕΙΑ';
 
   const clickCsv = () => {
