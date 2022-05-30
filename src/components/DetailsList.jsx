@@ -209,7 +209,9 @@ const DetailsList = (props) => {
         <Grid sx={{ display: 'flex', justifyContent: 'flex-end', my: 2 }}>
           {user?.role === 'municipality' && (
             <div>
-              <Button variant="contained">{lang === 'gr' ? 'Ληψη Backup' : 'Download Backup'}</Button>
+              <Button variant="contained" onClick={() => clickCsv()}>
+                {lang === 'gr' ? 'Ληψη Backup' : 'Download Backup'}
+              </Button>
               <CSVLink
                 ref={csvLink}
                 data={csvRows}
