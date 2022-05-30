@@ -25,6 +25,7 @@ import refreshToken from "./api/post/refreshToken";
 import Loading from "./tools/Loading";
 import LanguageHelper from "./tools/LanguageHelper";
 import { setLangAction } from "./redux/actions/lang";
+import EmailVerify from "./components/EmailVerify";
 
 const App = () => {
   const { height } = useWindowDimentions();
@@ -93,6 +94,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/verifyEmail/:token" element={<EmailVerify />} />
 
             {/* refugee */}
             <Route path="/preperation" element={<Preperation />} />
