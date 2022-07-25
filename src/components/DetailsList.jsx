@@ -257,8 +257,8 @@ const DetailsList = (props) => {
           >
             {rows.length >= 2 && user?.role === 'refugee'
               ? lang === 'gr'
-                ? 'Max forms allowed: 2'
-                : 'Μεγιστος αριθμος φορμων: 2'
+                ? 'Μεγιστος αριθμος φορμων: 2' 
+                : 'Max forms allowed: 2'
               : user?.role === 'municipality' || lang === 'gr'
               ? 'Νεα Φορμα'
               : 'Add Form'}
