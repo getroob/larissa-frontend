@@ -179,15 +179,15 @@ const MunicipalityForm = () => {
     //   content: <ChildForm control={control} isWritable={isWritable} />,
     // },
     {
-      label: "Στοιχεία Μητέρας",
+      label: lang === 'gr' ? 'Στοιχεία Μητέρας' : 'Info of Mother',
       content: <MomForm control={control} isWritable={isWritable} />,
     },
     {
-      label: "Στοιχεία Πατέρα",
+      label: lang === 'gr' ? 'Στοιχεία Πατέρα' : 'Info of Father',
       content: <DadForm control={control} isWritable={isWritable} />,
     },
     {
-      label: "Στοιχεία Κατοικίας",
+      label: lang === 'gr' ? 'Στοιχεία Κατοικίας' : 'Adderess Info',
       content: <ResidencyForm control={control} isWritable={isWritable} />,
     },
     // {
