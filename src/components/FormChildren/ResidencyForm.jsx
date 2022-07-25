@@ -1,25 +1,20 @@
-import React from "react";
-import { Controller } from "react-hook-form";
-import { Grid, TextField } from "@mui/material";
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { Grid, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 const ResidencyForm = ({ isWritable, control }) => {
   const lang = useSelector((state) => state.lang);
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction="column"
-      style={{ maxWidth: "500px" }}
-    >
+    <Grid container spacing={2} direction="column" style={{ maxWidth: '500px' }}>
       <Grid item>
         <Controller
           name="residency.city"
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? "Πόλη" : 'City'}
+              label={lang === 'gr' ? 'Πόλη' : 'City'}
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -35,7 +30,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? "Διευθυνση" : 'Address'}
+              label={lang === 'gr' ? 'Διευθυνση' : 'Address'}
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -51,12 +46,13 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? "Τηλεφωνο" : 'Phone'}
+              label={lang === 'gr' ? 'Τηλεφωνο' : 'Phone'}
               variant="outlined"
               value={value}
               onChange={onChange}
               fullWidth
               error={!!error}
+              type="number"
             />
           )}
         />

@@ -1,29 +1,29 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import HideOnScroll from "../tools/HideOnScroll";
-import { Divider, NativeSelect } from "@mui/material";
-import { ListItemIcon } from "@mui/material";
-import { PersonAdd } from "@mui/icons-material";
-import { Settings } from "@mui/icons-material";
-import { Logout } from "@mui/icons-material";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import HideOnScroll from '../tools/HideOnScroll';
+import { Divider, NativeSelect } from '@mui/material';
+import { ListItemIcon } from '@mui/material';
+import { PersonAdd } from '@mui/icons-material';
+import { Settings } from '@mui/icons-material';
+import { Logout } from '@mui/icons-material';
 
-import logoutUser from "../api/post/logoutUser";
-import { setUserAction } from "../redux/actions/user";
-import { setLangAction } from "../redux/actions/lang";
+import logoutUser from '../api/post/logoutUser';
+import { setUserAction } from '../redux/actions/user';
+import { setLangAction } from '../redux/actions/lang';
 
 const TopNav = () => {
   const user = useSelector((state) => state.user);
@@ -71,8 +71,8 @@ const TopNav = () => {
                   component="div"
                   sx={{
                     mr: 2,
-                    display: { xs: "none", md: "flex" },
-                    color: "secondary.light",
+                    display: { xs: 'none', md: 'flex' },
+                    color: 'secondary.light',
                     fontWeight: 600,
                   }}
                 >
@@ -82,8 +82,8 @@ const TopNav = () => {
                 <Box
                   sx={{
                     flexGrow: 1,
-                    display: { xs: "flex", md: "none" },
-                    color: "secondary.light",
+                    display: { xs: 'flex', md: 'none' },
+                    color: 'secondary.light',
                   }}
                 >
                   <IconButton
@@ -100,40 +100,30 @@ const TopNav = () => {
                     id="menu-appbar"
                     anchorEl={anchorElNav}
                     anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
+                      vertical: 'bottom',
+                      horizontal: 'left',
                     }}
                     keepMounted
                     transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
+                      vertical: 'top',
+                      horizontal: 'left',
                     }}
                     open={Boolean(anchorElNav)}
                     onClose={handleCloseNavMenu}
                     sx={{
-                      display: { xs: "block", md: "none" },
+                      display: { xs: 'block', md: 'none' },
                     }}
                   >
-                    {user?.role === "municipality" ? (
+                    {user?.role === 'municipality' ? (
                       <>
-                        <Link
-                          to="/preparedForms"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
+                        <Link to="/preparedForms" style={{ textDecoration: 'none', color: 'inherit' }}>
                           <MenuItem key="Forms" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                              Φορμες Προσφυγων
-                            </Typography>
+                            <Typography textAlign="center">Φορμες Προσφυγων</Typography>
                           </MenuItem>
                         </Link>
-                        <Link
-                          to="/municipalityForms"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
+                        <Link to="/municipalityForms" style={{ textDecoration: 'none', color: 'inherit' }}>
                           <MenuItem key="Forms" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                              Φορμες Ληξιαρχειου
-                            </Typography>
+                            <Typography textAlign="center">Φορμες Ληξιαρχειου</Typography>
                           </MenuItem>
                         </Link>
                         {/* <Link
@@ -152,17 +142,9 @@ const TopNav = () => {
                       </>
                     ) : (
                       <>
-                        <Link
-                          to="/preperation"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          <MenuItem
-                            key="Preperation"
-                            onClick={handleCloseNavMenu}
-                          >
-                            <Typography textAlign="center">
-                              {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
-                            </Typography>
+                        <Link to="/preperation" style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <MenuItem key="Preperation" onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">{lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}</Typography>
                           </MenuItem>
                         </Link>
                         {/* <Link
@@ -178,17 +160,9 @@ const TopNav = () => {
                             </Typography>
                           </MenuItem>
                         </Link> */}
-                        <Link
-                          to="/refugeeAppointments"
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          <MenuItem
-                            key="Appointments"
-                            onClick={handleCloseNavMenu}
-                          >
-                            <Typography textAlign="center">
-                              {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
-                            </Typography>
+                        <Link to="/refugeeAppointments" style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <MenuItem key="Appointments" onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">{lang === 'gr' ? 'Ραντεβου' : 'Appointments'}</Typography>
                           </MenuItem>
                         </Link>
                       </>
@@ -201,37 +175,23 @@ const TopNav = () => {
                   component="div"
                   sx={{
                     flexGrow: 1,
-                    display: { xs: "flex", md: "none" },
-                    color: "secondary.light",
+                    display: { xs: 'flex', md: 'none' },
+                    color: 'secondary.light',
                     fontWeight: 600,
                   }}
                 >
                   Roob.
                 </Typography>
-                <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                  {user?.role === "municipality" ? (
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                  {user?.role === 'municipality' ? (
                     <>
-                      <Link
-                        to="/preparedForms"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <Button
-                          key="Forms"
-                          onClick={handleCloseNavMenu}
-                          sx={{ my: 2, color: "white", display: "block" }}
-                        >
+                      <Link to="/preparedForms" style={{ textDecoration: 'none' }}>
+                        <Button key="Forms" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                           Φορμες Προσφυγων
                         </Button>
                       </Link>
-                      <Link
-                        to="/municipalityForms"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <Button
-                          key="Forms"
-                          onClick={handleCloseNavMenu}
-                          sx={{ my: 2, color: "white", display: "block" }}
-                        >
+                      <Link to="/municipalityForms" style={{ textDecoration: 'none' }}>
+                        <Button key="Forms" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                           Φορμες Ληξιαρχειου
                         </Button>
                       </Link>
@@ -250,15 +210,8 @@ const TopNav = () => {
                     </>
                   ) : (
                     <>
-                      <Link
-                        to="/preperation"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <Button
-                          key="Preperation"
-                          onClick={handleCloseNavMenu}
-                          sx={{ my: 2, color: "white", display: "block" }}
-                        >
+                      <Link to="/preperation" style={{ textDecoration: 'none' }}>
+                        <Button key="Preperation" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                           {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
                         </Button>
                       </Link>
@@ -274,15 +227,8 @@ const TopNav = () => {
                           Validate Forms
                         </Button>
                       </Link> */}
-                      <Link
-                        to="/refugeeAppointments"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <Button
-                          key="Appointments"
-                          onClick={handleCloseNavMenu}
-                          sx={{ my: 2, color: "white", display: "block" }}
-                        >
+                      <Link to="/refugeeAppointments" style={{ textDecoration: 'none' }}>
+                        <Button key="Appointments" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                           {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
                         </Button>
                       </Link>
@@ -291,65 +237,67 @@ const TopNav = () => {
                 </Box>
 
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                  {user?.role !== 'municipality' && <NativeSelect
-                    defaultValue={lang || 'gr'}
-                    inputProps={{
-                      name: 'lang',
-                      id: 'lang',
-                    }}
-                    onChange={(event) => dispatch(setLangAction(event.target.value))}
-                    sx={{color: 'white', borderColor: 'white'}}
-                  >
-                    <option value='gr'>Ελληνικα</option>
-                    <option value='en'>English</option>
-                  </NativeSelect>}
-                  <Tooltip title={user?.role === "municipality" ? 'Ρυθμισεις' : "Open settings"}>
+                  {user?.role !== 'municipality' && (
+                    <NativeSelect
+                      defaultValue={lang || 'gr'}
+                      inputProps={{
+                        name: 'lang',
+                        id: 'lang',
+                      }}
+                      onChange={(event) => dispatch(setLangAction(event.target.value))}
+                      sx={{ borderColor: 'white' }}
+                    >
+                      <option value="gr">Ελληνικα</option>
+                      <option value="en">English</option>
+                    </NativeSelect>
+                  )}
+                  <Tooltip title={user?.role === 'municipality' ? 'Ρυθμισεις' : 'Open settings'}>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
                         alt="Remy Sharp"
                         src="/static/images/avatar/2.jpg"
                         sx={{
-                          color: "primary.main",
-                          backgroundColor: "secondary.light",
+                          color: 'primary.main',
+                          backgroundColor: 'secondary.light',
                         }}
                       />
                     </IconButton>
                   </Tooltip>
                   <Menu
-                    sx={{ mt: "45px" }}
+                    sx={{ mt: '45px' }}
                     id="menu-appbar"
                     anchorEl={anchorElUser}
                     anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
+                      vertical: 'top',
+                      horizontal: 'right',
                     }}
                     keepMounted
                     transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
+                      vertical: 'top',
+                      horizontal: 'right',
                     }}
                     PaperProps={{
                       elevation: 0,
                       sx: {
-                        overflow: "visible",
-                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         mt: 1.5,
-                        "& .MuiAvatar-root": {
+                        '& .MuiAvatar-root': {
                           width: 32,
                           height: 32,
                           ml: -0.5,
                           mr: 1,
                         },
-                        "&:before": {
+                        '&:before': {
                           content: '""',
-                          display: "block",
-                          position: "absolute",
+                          display: 'block',
+                          position: 'absolute',
                           top: 0,
                           right: 14,
                           width: 10,
                           height: 10,
-                          bgcolor: "background.paper",
-                          transform: "translateY(-50%) rotate(45deg)",
+                          bgcolor: 'background.paper',
+                          transform: 'translateY(-50%) rotate(45deg)',
                           zIndex: 0,
                         },
                       },
@@ -381,43 +329,41 @@ const TopNav = () => {
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
-                      {user?.role === "municipality" || lang === 'gr' ? 'Αποσυνδεση' : 'Logout'}
+                      {user?.role === 'municipality' || lang === 'gr' ? 'Αποσυνδεση' : 'Logout'}
                     </MenuItem>
                   </Menu>
                 </Box>
               </>
             ) : (
-
               <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                <Link
-                  to={user ? "/" : "/login"}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to={user ? '/' : '/login'} style={{ textDecoration: 'none' }}>
                   <Typography
                     variant="h6"
                     noWrap
                     component="div"
                     sx={{
                       mr: 2,
-                      color: "secondary.light",
+                      color: 'secondary.light',
                       fontWeight: 600,
                     }}
                   >
                     Roob.
                   </Typography>
                 </Link>
-                {user?.role !== 'municipality' && <NativeSelect
-                  defaultValue={lang || 'gr'}
-                  inputProps={{
-                    name: 'lang',
-                    id: 'lang',
-                  }}
-                  onChange={(event) => dispatch(setLangAction(event.target.value))}
-                  sx={{color: 'white', borderColor: 'white'}}
-                >
-                  <option value='gr'>Ελληνικα</option>
-                  <option value='en'>English</option>
-                </NativeSelect>}
+                {user?.role !== 'municipality' && (
+                  <NativeSelect
+                    defaultValue={lang || 'gr'}
+                    inputProps={{
+                      name: 'lang',
+                      id: 'lang',
+                    }}
+                    onChange={(event) => dispatch(setLangAction(event.target.value))}
+                    sx={{ borderColor: 'white' }}
+                  >
+                    <option value="gr">Ελληνικα</option>
+                    <option value="en">English</option>
+                  </NativeSelect>
+                )}
               </Box>
             )}
           </Toolbar>
