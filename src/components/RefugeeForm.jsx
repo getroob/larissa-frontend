@@ -65,7 +65,7 @@ const RefugeeForm = () => {
         }
       );
       if (!response.ok) {
-        alert("Failed to fetch");
+        console.error("Failed to fetch");
       } else {
         const newCertificate = await response.json();
         console.log(newCertificate);
@@ -73,7 +73,7 @@ const RefugeeForm = () => {
         return newCertificate;
       }
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
   };
 
@@ -93,13 +93,13 @@ const RefugeeForm = () => {
         }
       );
       if (!response.ok) {
-        alert("Failed to fetch");
+        console.error("Failed to fetch");
       } else {
         const newCertificate = await response.json();
         return newCertificate;
       }
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
   };
 
