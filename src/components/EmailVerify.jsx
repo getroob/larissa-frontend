@@ -22,7 +22,7 @@ const EmailVerify = () => {
                     await refreshToken();
                     await verify(false);
                 } catch (error) {
-                    alert(error);
+                    console.error(error);
                 }
             } else {
                 setError(lang === 'gr' ? 'Κατι πηγε λαθος. Προσπαθηστε ξανα αργοτερα' : 'Something went bad. Try again later')
