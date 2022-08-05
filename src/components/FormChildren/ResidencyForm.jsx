@@ -56,7 +56,14 @@ const ResidencyForm = ({ isWritable, control }) => {
               label={lang === 'gr' ? 'Τηλεφωνο' : 'Phone'}
               variant="outlined"
               value={value}
-              onChange={onChange}
+              onChange={(event) => onChange({
+                  ...event,
+                  target: {
+                    ...event.target,
+                    value: event.target.value.replace(/e/ig, '')
+                  }
+                })
+              }
               fullWidth
               error={!!error}
               type="number"
