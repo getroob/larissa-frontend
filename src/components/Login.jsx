@@ -38,7 +38,7 @@ const Login = () => {
         setError(text);
       }
     } else {
-      setError("Please provide valid credentials");
+      setError(lang === 'gr' ? 'Λαθος στοιχεια' : 'Please provide valid credentials');
     }
   };
 
