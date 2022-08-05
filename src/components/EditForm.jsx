@@ -237,17 +237,17 @@ const MunicipalityForm = () => {
           await refreshToken();
           await loadForm(false);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
       }
     }
   };
 
-  const onSubmit = async (data, retry) => {
+  const onSubmit = async (data, retry, type) => {
     try {
-      await updateForm(data);
+      await updateForm({...data, stage: type});
       window.location.replace(
         user?.role === "refugee"
           ? data?.createdBy === "refugee"
@@ -261,12 +261,12 @@ const MunicipalityForm = () => {
       if (retry) {
         try {
           await refreshToken();
-          await onSubmit(data, false);
+          await onSubmit(data, false, type);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
       }
     }
   };
@@ -320,12 +320,22 @@ const MunicipalityForm = () => {
                           {user?.role === "municipality" || lang === 'gr' ? 'Επομενο' : 'Next'}
                         </Button>
                       ) : (
-                        <Button
-                          onClick={handleSubmit((data) => onSubmit(data, true))}
-                          variant="contained"
-                        >
-                          {user?.role === "municipality" || lang === 'gr' ? 'Καταχωριση' :'Submit'}
-                        </Button>
+                        <ButtonGroup variant="contained">
+                          <Button
+                            onClick={handleSubmit((data) => onSubmit(data, true, 'edit'))}
+                            variant="contained"
+                            disabled={getValues().stage !== 'edit'}
+                          >
+                            {user?.role === "municipality" || lang === 'gr' ? 'Αποθήκευση' :'Save'}
+                          </Button>
+                          <Button
+                            onClick={handleSubmit((data) => onSubmit(data, true, 'done'))}
+                            variant="outlined"
+                            disabled={getValues().stage !== 'edit'}
+                          >
+                            {user?.role === "municipality" || lang === 'gr' ? 'Οριστικοποίηση' :'Submit'}
+                          </Button>
+                        </ButtonGroup>
                       )}
                     </Box>
                   </StepContent>
