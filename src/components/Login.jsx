@@ -35,7 +35,8 @@ const Login = () => {
         dispatch(setUserAction(res));
       } catch (error) {
         const { text } = JSON.parse(error?.message);
-        setError(text);
+        console.error(text)
+        setError(lang === 'gr' ? 'Λαθος στοιχεια' : 'Please provide valid credentials');
       }
     } else {
       setError(lang === 'gr' ? 'Λαθος στοιχεια' : 'Please provide valid credentials');
