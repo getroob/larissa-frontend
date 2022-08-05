@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 import Container from "@mui/material/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
