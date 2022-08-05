@@ -25,6 +25,8 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
+  Tab,
+  Tabs,
   TextField,
   Typography,
 } from '@mui/material';
@@ -32,6 +34,7 @@ import createForm from '../api/post/createForm';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import deleteForm from '../api/delete/deleteForm';
+import updateForm from '../api/put/updateForm';
 
 const DetailsList = (props) => {
   const [page, setPage] = useState(0);
@@ -42,17 +45,18 @@ const DetailsList = (props) => {
   const [refugees, setRefugees] = useState([]);
   const [refugeeId, setRefugeeId] = useState('');
   const [openModal, setOpenModal] = useState(false);
+  const [tab, setTab] = useState('all');
 
   const user = useSelector((state) => state.user);
   const lang = useSelector((state) => state.lang);
   const csvLink = useRef();
 
   const columns = [
-    // {
-    //   id: "status",
-    //   label: "Κατάσταση",
-    //   minWidth: 170,
-    // },
+    {
+      id: "stage",
+      label: lang === 'gr' ? 'Στάδιο' : 'Stage',
+      minWidth: 170,
+    },
     // { id: "childFullName", label: "Όνομα Παιδίου", minWidth: 170 },
     { id: 'fatherFullName', label: lang === 'gr' ? 'Όνομα Πατέρα' : 'Father Name', minWidth: 100 },
     { id: 'motherFullName', label: lang === 'gr' ? 'Όνομα Μητέρας' : 'Mother Name' },
@@ -81,6 +85,7 @@ const DetailsList = (props) => {
           .map((form) => {
             return {
               id: form.id,
+              stage: form.stage,
               // status: "Test",
               // childFullName: `${form.child.firstName || ""} ${
               //   form.child.lastname || ""
@@ -97,10 +102,10 @@ const DetailsList = (props) => {
           await refreshToken();
           await loadForms(false);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
       }
     }
   };
@@ -116,10 +121,10 @@ const DetailsList = (props) => {
           await refreshToken();
           await loadRefugees(false);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
       }
     }
   };
@@ -141,10 +146,36 @@ const DetailsList = (props) => {
           await refreshToken();
           await handleDeleteForm(false);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
+      }
+    }
+  };
+
+  const handleStageDeleteForm = async (retry, formId) => {
+    try {
+      const data = rows?.find(row => row?.id === openModal)
+      await updateForm({...data, stage: 'deleted'});
+      handleModal(false);
+      window.location.replace(
+        user?.role === 'refugee'
+          ? '/preperation'
+          : forms?.find((f) => f?.id === formId)?.createdBy === 'refugee'
+          ? '/preparedForms'
+          : '/'
+      );
+    } catch (error) {
+      if (retry) {
+        try {
+          await refreshToken();
+          await handleStageDeleteForm(false, formId);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        console.error(error);
       }
     }
   };
@@ -199,10 +230,10 @@ const DetailsList = (props) => {
           await refreshToken();
           await createForm(false);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
       }
     }
   };
@@ -247,7 +278,7 @@ const DetailsList = (props) => {
           )}
           <Button
             variant="contained"
-            disabled={rows.length >= 2 && user?.role === 'refugee'}
+            disabled={rows.filter(row => row.stage !== 'deleted').length >= 2 && user?.role === 'refugee'}
             onClick={() =>
               // props.type === "municipalityForms"
               //   ? setOpenPopup(true)
@@ -255,7 +286,7 @@ const DetailsList = (props) => {
               addForm(true)
             }
           >
-            {rows.length >= 2 && user?.role === 'refugee'
+            {rows.filter(row => row.stage !== 'deleted').length >= 2 && user?.role === 'refugee'
               ? lang === 'gr'
                 ? 'Μεγιστος αριθμος φορμων: 2' 
                 : 'Max forms allowed: 2'
@@ -265,6 +296,18 @@ const DetailsList = (props) => {
           </Button>
         </Grid>
       )}
+      <Tabs
+        value={tab}
+        onChange={(event, newValue) => setTab(newValue)}
+        textColor="primary"
+        indicatorColor="primary"
+        aria-label="primary tabs example"
+      >
+        <Tab value="all" label={lang === 'gr' ? 'Όλες' : 'All'} />
+        <Tab value="edit" label={lang === 'gr' ? 'Σε Επεξεργασία' : 'Temporarily Saved'} />
+        <Tab value="done" label={lang === 'gr' ? 'Ολοκληρωμένες' : 'Submitted'} />
+        <Tab value="deleted" label={lang === 'gr' ? 'Διεγραμένες' : 'Deleted'} />
+      </Tabs>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -286,7 +329,7 @@ const DetailsList = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).filter(row => tab === 'all' || row.stage === tab).map((row) => {
                 return (
                   <TableRow
                     hover
@@ -307,14 +350,18 @@ const DetailsList = (props) => {
                           onClick={() => i !== 3 && window.location.replace(`/forms/${row.id}`)}
                           sx={{ cursor: i !== 3 ? 'pointer' : 'default' }}
                         >
-                          {column.id === 'status' ? (
-                            <Chip label={value} color={row.status === 'Test' ? 'warning' : 'default'} variant="outlined" />
+                          {column.id === 'stage' ? (
+                            <Chip 
+                              label={row.stage === 'edit' ? lang === 'gr' ? 'Σε Επεξεργασία' : 'Temporarily Saved' : row.stage === 'done' ? lang === 'gr' ? 'Ολοκληρωμένες' : 'Submitted' : row.stage === 'deleted' ? lang === 'gr' ? 'Διεγραμένες' : 'Deleted' : lang === 'gr' ? 'Άγνωστο' : 'Unknown'} 
+                              color={row.stage === 'edit' ? 'warning' : row.stage === 'done' ? 'success' : row.stage === 'deleted' ? 'error' : 'default'} 
+                              variant="outlined" />
                           ) : i === 3 ? (
                             <ButtonGroup>
                               <Button
                                 variant="outlined"
                                 color="success"
                                 size="small"
+                                disabled={row.stage !== 'edit'}
                                 onClick={() => window.location.replace(`/forms/${row.id}`)}
                               >
                                 {lang === 'gr' ? 'Επεξεργασια' : 'Edit'}
@@ -504,7 +551,7 @@ const DetailsList = (props) => {
                               >
                                 PDF
                               </Button>
-                              <Button variant="outlined" color="error" size="small" onClick={() => setOpenModal(row.id)}>
+                              <Button variant="outlined" color="error" size="small" disabled={row.stage === 'deleted'} onClick={() => setOpenModal(row.id)}>
                                 {lang === 'gr' ? 'Διαγραφη' : 'Delete'}
                               </Button>
                             </ButtonGroup>
@@ -541,26 +588,52 @@ const DetailsList = (props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {user?.role === 'municipality' || lang === 'gr'
-            ? 'Θελετε σιγουρα να διαγραψετε αυτην την φορμα;'
-            : 'Are you sure you want to delete this form?'}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {user?.role === 'municipality' || lang === 'gr'
-              ? 'Αυτη η επιλογη δεν μπορει να αναιρεθει αργοτερα'
-              : 'This action cannot be undone'}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" color="success" onClick={() => handleModal(false)}>
-            {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : 'Cancel'}
-          </Button>
-          <Button variant="outlined" color="error" onClick={() => handleDeleteForm(true, openModal)} autoFocus>
-            {user?.role === 'municipality' || lang === 'gr' ? 'Διαγραφη' : 'Delete'}
-          </Button>
-        </DialogActions>
+        {rows?.find(row => row?.id === openModal)?.stage === 'edit' ?
+          <>
+            <DialogTitle id="alert-dialog-title">
+              {user?.role === 'municipality' || lang === 'gr'
+                ? 'Θελετε σιγουρα να διαγραψετε οριστικά αυτην την φορμα;'
+                : 'Are you sure you want to permanently delete this form?'}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {user?.role === 'municipality' || lang === 'gr'
+                  ? 'Αυτη η επιλογη δεν μπορει να αναιρεθει αργοτερα'
+                  : 'This action cannot be undone'}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button variant="contained" color="success" onClick={() => handleModal(false)}>
+                {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : 'Cancel'}
+              </Button>
+              <Button variant="outlined" color="error" onClick={() => handleDeleteForm(true, openModal)} autoFocus>
+                {user?.role === 'municipality' || lang === 'gr' ? 'Οριστική Διαγραφη' : 'Permanently Delete'}
+              </Button>
+            </DialogActions>
+          </> : 
+          <>
+            <DialogTitle id="alert-dialog-title">
+              {user?.role === 'municipality' || lang === 'gr'
+                ? 'Θελετε σιγουρα να μετακινησετε αυτην την φορμα στις διεγραμμένες;'
+                : 'Are you sure you want to move this form to deleted stage?'}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {user?.role === 'municipality' || lang === 'gr'
+                  ? 'Αυτη η επιλογη δεν μπορει να αναιρεθει αργοτερα'
+                  : 'This action cannot be undone'}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button variant="contained" color="success" onClick={() => handleModal(false)}>
+                {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : 'Cancel'}
+              </Button>
+              <Button variant="outlined" color="error" onClick={() => handleStageDeleteForm(true, openModal)} autoFocus>
+                {user?.role === 'municipality' || lang === 'gr' ? 'Διαγραφη' : 'Delete'}
+              </Button>
+            </DialogActions>
+          </>
+        }
       </Dialog>
       {/* <Dialog open={openPopup} onClose={() => handlePopup(false)}>
         <DialogTitle>Επελεξτε κηδεμονα</DialogTitle>
