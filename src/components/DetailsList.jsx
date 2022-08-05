@@ -61,7 +61,7 @@ const DetailsList = (props) => {
     { id: 'fatherFullName', label: lang === 'gr' ? 'Όνομα Πατέρα' : 'Father Name', minWidth: 100 },
     { id: 'motherFullName', label: lang === 'gr' ? 'Όνομα Μητέρας' : 'Mother Name' },
     { id: 'phone', label: lang === 'gr' ? 'Τηλεφωνο' : 'Phone', minWidth: 100 },
-    { id: 'options', label: lang === 'gr' ? 'Αλλο' : 'Other', minWidth: 100 },
+//     { id: 'options', label: lang === 'gr' ? 'Αλλο' : 'Other', minWidth: 100 },
   ];
 
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
