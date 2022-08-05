@@ -40,10 +40,10 @@ const Appointment = () => {
   //         await refreshToken();
   //         await loadForms(false);
   //       } catch (error) {
-  //         alert(error);
+  //         console.error(error);
   //       }
   //     } else {
-  //       alert(error);
+  //       console.error(error);
   //     }
   //   }
   // };
@@ -58,10 +58,10 @@ const Appointment = () => {
   //         await refreshToken();
   //         await loadAppointments(false);
   //       } catch (error) {
-  //         alert(error);
+  //         console.error(error);
   //       }
   //     } else {
-  //       alert(error);
+  //       console.error(error);
   //     }
   //   }
   // };
@@ -76,10 +76,10 @@ const Appointment = () => {
   //         await refreshToken();
   //         await onSubmit(data, false);
   //       } catch (error) {
-  //         alert(error);
+  //         console.error(error);
   //       }
   //     } else {
-  //       alert(error);
+  //       console.error(error);
   //     }
   //   }
   // };
