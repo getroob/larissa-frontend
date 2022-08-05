@@ -32,10 +32,10 @@ const MunicipalityAppointments = () => {
           await refreshToken();
           await loadAppointments(false);
         } catch (error) {
-          alert(error);
+          console.error(error);
         }
       } else {
-        alert(error);
+        console.error(error);
       }
     }
   };
