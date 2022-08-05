@@ -22,7 +22,14 @@ const DadForm = ({ isWritable, control }) => {
               label={lang === 'gr' ? "Επίθετο" : 'Last Name'}
               variant="outlined"
               value={value}
-              onChange={onChange}
+              onChange={(event) => onChange({
+                  ...event,
+                  target: {
+                    ...event.target,
+                    value: event.target.value.replace(/[0-9]+/ig, '')
+                  }
+                })
+              }
               fullWidth
               error={!!error}
             />
@@ -38,7 +45,14 @@ const DadForm = ({ isWritable, control }) => {
               label={lang === 'gr' ? "Όνομα" : 'First Name'}
               variant="outlined"
               value={value}
-              onChange={onChange}
+              onChange={(event) => onChange({
+                  ...event,
+                  target: {
+                    ...event.target,
+                    value: event.target.value.replace(/[0-9]+/ig, '')
+                  }
+                })
+              }
               fullWidth
               error={!!error}
             />
