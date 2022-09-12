@@ -40,7 +40,12 @@ const LanguageHelper = () => {
               <WordPlayer word="ληξιαρχείο" lang="eng" />
               <WordPlayer word="αντίγραφο" lang="eng" />
               <Box sx={{ color: 'darkgray', fontStyle: 'italic' }}>
-                <Typography style={{ textAlign: 'right' }}>Powered by EasyRights</Typography>
+                <Typography style={{ textAlign: 'right' }}>
+                  Powered by
+                  <a href="https://testcalst.hf.ntnu.no/Account/IL1?returnurl=%2FHome%2FLessons" alt="Easyrights">
+                    <img src="./easyrights.webp" width="90px" alt="Easyrights"></img>
+                  </a>
+                </Typography>
               </Box>
             </Paper>
           </Grow>
