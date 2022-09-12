@@ -61,7 +61,7 @@ const DetailsList = (props) => {
     { id: 'fatherFullName', label: lang === 'gr' ? 'Όνομα Πατέρα' : 'Father Name', minWidth: 100 },
     { id: 'motherFullName', label: lang === 'gr' ? 'Όνομα Μητέρας' : 'Mother Name' },
     { id: 'phone', label: lang === 'gr' ? 'Τηλεφωνο' : 'Phone', minWidth: 100 },
-//     { id: 'options', label: lang === 'gr' ? 'Αλλο' : 'Other', minWidth: 100 },
+    { id: 'options', label: lang === 'gr' ? 'Αλλο' : 'Other', minWidth: 100 },
   ];
 
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -304,8 +304,14 @@ const DetailsList = (props) => {
         aria-label="primary tabs example"
       >
         <Tab value="all" label={lang === 'gr' ? 'Όλες' : 'All'} />
-        <Tab value="edit" label={lang === 'gr' ? 'Σε Επεξεργασία' : 'Temporarily Saved'} />
-        <Tab value="done" label={lang === 'gr' ? 'Ολοκληρωμένες' : 'Submitted'} />
+        <Tab value="edit" label={props.type === 'preperation' || props.type === 'preparedForms' 
+          ? lang === 'gr' ? 'Σε Σύνταξη' : 'Temporarily Saved'
+          : lang === 'gr' ? 'Σε Επεξεργασία' : 'Temporarily Saved'
+        } />
+        <Tab value="done" label={props.type === 'preperation' || props.type === 'preparedForms' 
+          ? lang === 'gr' ? 'Υποβληθείσες' : 'Submitted'
+          : lang === 'gr' ? 'Ολοκληρωμένες' : 'Submitted'
+        } />
         <Tab value="deleted" label={lang === 'gr' ? 'Διεγραμένες' : 'Deleted'} />
       </Tabs>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -352,8 +358,39 @@ const DetailsList = (props) => {
                         >
                           {column.id === 'stage' ? (
                             <Chip 
-                              label={row.stage === 'edit' ? lang === 'gr' ? 'Σε Επεξεργασία' : 'Temporarily Saved' : row.stage === 'done' ? lang === 'gr' ? 'Ολοκληρωμένες' : 'Submitted' : row.stage === 'deleted' ? lang === 'gr' ? 'Διεγραμένες' : 'Deleted' : lang === 'gr' ? 'Άγνωστο' : 'Unknown'} 
-                              color={row.stage === 'edit' ? 'warning' : row.stage === 'done' ? 'success' : row.stage === 'deleted' ? 'error' : 'default'} 
+                              label={
+                                props.type === 'preperation' || props.type === 'preparedForms'
+                                ? row.stage === 'edit' 
+                                  ? lang === 'gr' 
+                                    ? 'Σε Σύνταξη' 
+                                    : 'Temporarily Saved' 
+                                : row.stage === 'done' 
+                                  ? lang === 'gr' 
+                                    ? 'Υποβληθείσα' 
+                                    : 'Submitted' 
+                                : row.stage === 'deleted' 
+                                  ? lang === 'gr' 
+                                    ? 'Διεγραμένες' 
+                                    : 'Deleted' 
+                                : lang === 'gr' ? 'Άγνωστο' : 'Unknown'
+                              : row.stage === 'edit' 
+                                  ? lang === 'gr' 
+                                    ? 'Σε Επεξεργάσια' 
+                                    : 'Temporarily Saved' 
+                                : row.stage === 'done' 
+                                  ? lang === 'gr' 
+                                    ? 'Ολοκληρωμένες' 
+                                    : 'Submitted' 
+                                : row.stage === 'deleted' 
+                                  ? lang === 'gr' 
+                                    ? 'Διεγραμένες' 
+                                    : 'Deleted' 
+                                : lang === 'gr' ? 'Άγνωστο' : 'Unknown'} 
+                              color={
+                                row.stage === 'edit' ? 'warning' 
+                                : row.stage === 'done' ? 'success' 
+                                : row.stage === 'deleted' ? 'error' 
+                                : 'default'} 
                               variant="outlined" />
                           ) : i === 3 ? (
                             <ButtonGroup>
