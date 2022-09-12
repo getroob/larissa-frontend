@@ -43,7 +43,7 @@ const LanguageHelper = () => {
                 <Typography style={{ textAlign: 'right' }}>
                   Powered by
                   <a href="https://testcalst.hf.ntnu.no/Account/IL1?returnurl=%2FHome%2FLessons" alt="Easyrights">
-                    <img src="./assets/easyrights.png" targer="_blank" width="90px" alt="Easyrights" style={{ verticalAlign: 'bottom' }}></img>
+                    <img src="./assets/easyrights.png" target="_blank" width="90px" alt="Easyrights" style={{ verticalAlign: 'bottom' }}></img>
                   </a>
                 </Typography>
               </Box>
