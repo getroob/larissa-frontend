@@ -75,9 +75,11 @@ const LanguageHelper = () => {
                 padding: '8px',
               }}
             >
-              {recordings.map((word) => (
-                <WordPlayer key={word} word={word} lang="eng" />
-              ))}
+              <div style={{ height: '400px', overflowX: 'hidden' }}>
+                {recordings.map((word) => (
+                  <WordPlayer key={word} word={word} lang="eng" />
+                ))}
+              </div>
               <Box sx={{ color: 'darkgray', fontStyle: 'italic' }}>
                 <Typography style={{ textAlign: 'right' }}>
                   Powered by
