@@ -10,6 +10,52 @@ import { Typography } from '@mui/material';
 
 const LanguageHelper = () => {
   const [isVisible, setVisible] = useState(false);
+  const recordings = [
+    'αίτηση',
+    'αιτών',
+    'αντίγραφο',
+    'γάμος',
+    'γέννηση',
+    'γιατρός',
+    'γλώσσα',
+    'γονέας',
+    'δηλώνω',
+    'δήλωση',
+    'δήμος',
+    'δημόσιος',
+    'διαβατήριο',
+    'διαδικασία',
+    'διευθυντής',
+    'δικαστήριο',
+    'έγγραφος',
+    'έκδοση',
+    'επιθυμώ',
+    'επώνυμο',
+    'έτος',
+    'ηλικία',
+    'ημέρα',
+    'ημερομηνία',
+    'κατοικία',
+    'ληξιαρχείο',
+    'ληξίαρχος',
+    'μαία',
+    'μαιευτήριο',
+    'μήνας',
+    'μητέρα',
+    'νεογνό',
+    'νοσοκομείο',
+    'ξένος',
+    'όνομα',
+    'παιδί',
+    'πατέρας',
+    'πατρότητα',
+    'πιστοποιητικό',
+    'πολίτης',
+    'τέκνο',
+    'τοκετός',
+    'τόπος',
+    'χώρα',
+  ];
 
   return (
     <Box sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 2 }}>
@@ -29,21 +75,21 @@ const LanguageHelper = () => {
                 padding: '8px',
               }}
             >
-              <WordPlayer word="όνομα" lang="eng" />
-              <WordPlayer word="επώνυμο" lang="eng" />
-              <WordPlayer word="πιστοποιητικό" lang="eng" />
-              <WordPlayer word="ημερομηνία" lang="eng" />
-              <WordPlayer word="γέννηση" lang="eng" />
-              <WordPlayer word="μωρό" lang="eng" />
-              <WordPlayer word="παιδί" lang="eng" />
-              <WordPlayer word="αίτηση" lang="eng" />
-              <WordPlayer word="ληξιαρχείο" lang="eng" />
-              <WordPlayer word="αντίγραφο" lang="eng" />
+              {recordings.map((word) => (
+                <WordPlayer key={word} word={word} lang="eng" />
+              ))}
               <Box sx={{ color: 'darkgray', fontStyle: 'italic' }}>
                 <Typography style={{ textAlign: 'right' }}>
                   Powered by
                   <a href="https://testcalst.hf.ntnu.no/Account/IL1?returnurl=%2FHome%2FLessons" alt="Easyrights">
-                    <img src="./assets/easyrights.png" target="_blank" rel="noreferrer" width="90px" alt="Easyrights" style={{ verticalAlign: 'bottom' }}></img>
+                    <img
+                      src="./assets/easyrights.png"
+                      target="_blank"
+                      rel="noreferrer"
+                      width="90px"
+                      alt="Easyrights"
+                      style={{ verticalAlign: 'bottom' }}
+                    ></img>
                   </a>
                 </Typography>
               </Box>
