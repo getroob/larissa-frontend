@@ -81,7 +81,7 @@ const LanguageHelper = () => {
               <Box sx={{ color: 'darkgray', fontStyle: 'italic' }}>
                 <Typography style={{ textAlign: 'right' }}>
                   Powered by
-                  <a href="https://testcalst.hf.ntnu.no/Exercise/no/3093?wrid=1404" alt="Easyrights">
+                  <a href="https://testcalst.hf.ntnu.no/Exercise/no/3093?wrid=1404" alt="CALST">
                     <img
                       src="./assets/calst.png"
                       target="_blank"
