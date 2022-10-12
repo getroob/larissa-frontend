@@ -12,66 +12,63 @@ const Preperation = () => {
   }, [user]);
 
   return (
-    <div className="m-5">
-      <h2>{lang === 'gr' ? 'Πληροφοριες σχετικα με την διαδικασια' : 'Information about the process'}</h2>
+    <div className='m-5'>
+      <h2>
+        {lang === 'gr'
+          ? 'Πληροφοριες σχετικα με την διαδικασια'
+          : 'Information about the process'}
+      </h2>
       <ListGroup>
         <ListGroup.Item>
-          {/* <a
-            href={`${process.env.PUBLIC_URL}/assets/eleftherios-myriounis.pdf`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read more
-          </a> */}
           <a
-            href={`${process.env.PUBLIC_URL}/assets/Γενικες οδηγιες.pdf`}
-            target="_blank"
-            rel="noreferrer"
+            href={`${process.env.PUBLIC_URL}/assets/${
+              lang === 'gr'
+                ? 'ΔΗΛΩΣΗ ΓΕΝΝΗΣΗΣ.pdf'
+                : 'BIRTH REGISTRATION ACT.pdf'
+            }`}
+            target='_blank'
+            rel='noreferrer'
           >
-            {lang === 'gr' ? 'Γενικες οδηγιες' : 'General Instructions'}
+            {lang === 'gr' ? 'ΔΗΛΩΣΗ ΓΕΝΝΗΣΗΣ' : 'BIRTH REGISTRATION ACT'}
           </a>
         </ListGroup.Item>
         <ListGroup.Item>
           <a
-            href={`${process.env.PUBLIC_URL}/assets/Παραδειγμα πιστοποιητικου γεννησης.pdf`}
-            target="_blank"
-            rel="noreferrer"
+            href={`${process.env.PUBLIC_URL}/assets/${
+              lang === 'gr'
+                ? 'ΑΙΤΗΣΗ ΟΝΟΜΑΤΟΔΟΣΙΑΣ.pdf'
+                : 'NAME DECLARATION APPLICATION.pdf'
+            }`}
+            target='_blank'
+            rel='noreferrer'
           >
-            {lang === 'gr' ? 'Παραδειγμα πιστοποιητικου γεννησης' : 'Birth certificate example'}
+            {lang === 'gr'
+              ? 'ΑΙΤΗΣΗ ΟΝΟΜΑΤΟΔΟΣΙΑΣ'
+              : 'NAME DECLARATION APPLICATION'}
           </a>
         </ListGroup.Item>
         <ListGroup.Item>
           <a
-            href={`${process.env.PUBLIC_URL}/assets/Οδηγιες δηλωσης γεννησεων.pdf`}
-            target="_blank"
-            rel="noreferrer"
+            href={`${process.env.PUBLIC_URL}/assets/${
+              lang === 'gr'
+                ? 'ΔΗΛΩΣΗ ΟΝΟΜΑΤΟΣ.pdf'
+                : 'NAME DECLARATION.pdf'
+            }`}
+            target='_blank'
+            rel='noreferrer'
           >
-            {lang === 'gr' ? 'Οδηγιες δηλωσεις γεννησεων' : 'Instructions for birth declarations'}
-          </a>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <a
-            href={`${process.env.PUBLIC_URL}/assets/Οδηγιες ονοματοδοσιας.pdf`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {lang === 'gr' ? 'Οδηγιες ονοματοδοσιας' : 'Naming instructions'}
-          </a>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <a
-            href={`${process.env.PUBLIC_URL}/assets/Παραδειγμα αιτησης ονοματοδοσιας.pdf`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {lang === 'gr' ? 'Παραδειγμα αιτησης ονοματοδοσιας' : 'Example of a naming application'}
+            {lang === 'gr' ? 'ΔΗΛΩΣΗ ΟΝΟΜΑΤΟΣ' : 'NAME DECLARATION'}
           </a>
         </ListGroup.Item>
       </ListGroup>
-      <h3 className="mt-5">{lang === 'gr' ? 'Προετοιμασια αιτησης ονοματοδοσιας' : 'Naming application preparation'}</h3>
-      <DetailsList type="preperation" />
+      <h3 className='mt-5'>
+        {lang === 'gr'
+          ? 'Προετοιμασια αιτησης ονοματοδοσιας'
+          : 'Naming application preparation'}
+      </h3>
+      <DetailsList type='preperation' />
     </div>
-  );
+  )
 };
 
 export default Preperation;
