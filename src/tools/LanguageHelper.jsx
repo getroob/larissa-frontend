@@ -75,26 +75,26 @@ const LanguageHelper = () => {
                 padding: '8px',
               }}
             >
-              <div style={{ height: '400px', overflowX: 'hidden' }}>
-                {recordings.map((word) => (
-                  <WordPlayer key={word} word={word} lang="eng" />
+              <div style={{ height: '380px', overflowX: 'hidden' }}>
+                {recordings.map(word => (
+                  <WordPlayer key={word} word={word} lang='eng' />
                 ))}
               </div>
               <Box sx={{ color: 'darkgray', fontStyle: 'italic' }}>
                 <Typography style={{ textAlign: 'right' }}>
                   Powered by
                   <a
-                    href="https://testcalst.hf.ntnu.no/Exercise/no/3093?wrid=1404"
-                    alt="CALST"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://testcalst.hf.ntnu.no/Exercise/no/3093?wrid=1404'
+                    alt='CALST'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     <img
-                      src="./assets/calst.png"
-                      target="_blank"
-                      rel="noreferrer"
-                      width="90px"
-                      alt="CALST"
+                      src='./assets/easyrights-logo.jpg'
+                      target='_blank'
+                      rel='noreferrer'
+                      width='90px'
+                      alt='easyright logo'
                       style={{ verticalAlign: 'bottom' }}
                     ></img>
                   </a>
@@ -104,13 +104,18 @@ const LanguageHelper = () => {
           </Grow>
         )}
       </Box>
-      <Box onClick={() => setVisible(!isVisible)} role="presentation">
-        <Fab color="primary" size="large">
-          <QuestionMarkIcon />
+      <Box onClick={() => setVisible(!isVisible)} role='presentation'>
+        <Fab color='primary' size='large' sx={{ borderRadius: '50%', overflow: 'hidden'}}>
+          <img
+            id='calst-logo'
+            src='./assets/calst-logo.png'
+            width='85px'
+            alt='CALST logo'
+          />
         </Fab>
       </Box>
     </Box>
-  );
+  )
 };
 
 export default LanguageHelper;
