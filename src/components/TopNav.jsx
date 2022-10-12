@@ -61,14 +61,14 @@ const TopNav = () => {
   return (
     <HideOnScroll>
       <AppBar>
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Toolbar disableGutters>
             {user ? (
               <>
                 <Typography
-                  variant="h6"
+                  variant='h6'
                   noWrap
-                  component="div"
+                  component='div'
                   sx={{
                     mr: 2,
                     display: { xs: 'none', md: 'flex' },
@@ -76,7 +76,10 @@ const TopNav = () => {
                     fontWeight: 600,
                   }}
                 >
-                  Roob.
+                  <img
+                    src={`${process.env.PUBLIC_URL}/assets/larissa-logo.png`}
+                    alt='larissa logo'
+                  />
                 </Typography>
 
                 <Box
@@ -87,17 +90,17 @@ const TopNav = () => {
                   }}
                 >
                   <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
+                    size='large'
+                    aria-label='account of current user'
+                    aria-controls='menu-appbar'
+                    aria-haspopup='true'
                     onClick={handleOpenNavMenu}
-                    color="inherit"
+                    color='inherit'
                   >
                     <MenuIcon />
                   </IconButton>
                   <Menu
-                    id="menu-appbar"
+                    id='menu-appbar'
                     anchorEl={anchorElNav}
                     anchorOrigin={{
                       vertical: 'bottom',
@@ -116,14 +119,24 @@ const TopNav = () => {
                   >
                     {user?.role === 'municipality' ? (
                       <>
-                        <Link to="/preparedForms" style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <MenuItem key="Forms" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">Φορμες Προσφυγων</Typography>
+                        <Link
+                          to='/preparedForms'
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                          <MenuItem key='Forms' onClick={handleCloseNavMenu}>
+                            <Typography textAlign='center'>
+                              Φορμες Προσφυγων
+                            </Typography>
                           </MenuItem>
                         </Link>
-                        <Link to="/municipalityForms" style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <MenuItem key="Forms" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">Φορμες Ληξιαρχειου</Typography>
+                        <Link
+                          to='/municipalityForms'
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                          <MenuItem key='Forms' onClick={handleCloseNavMenu}>
+                            <Typography textAlign='center'>
+                              Φορμες Ληξιαρχειου
+                            </Typography>
                           </MenuItem>
                         </Link>
                         {/* <Link
@@ -142,9 +155,17 @@ const TopNav = () => {
                       </>
                     ) : (
                       <>
-                        <Link to="/preperation" style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <MenuItem key="Preperation" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}</Typography>
+                        <Link
+                          to='/preperation'
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                          <MenuItem
+                            key='Preperation'
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign='center'>
+                              {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
+                            </Typography>
                           </MenuItem>
                         </Link>
                         {/* <Link
@@ -160,9 +181,17 @@ const TopNav = () => {
                             </Typography>
                           </MenuItem>
                         </Link> */}
-                        <Link to="/refugeeAppointments" style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <MenuItem key="Appointments" onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{lang === 'gr' ? 'Ραντεβου' : 'Appointments'}</Typography>
+                        <Link
+                          to='/refugeeAppointments'
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                          <MenuItem
+                            key='Appointments'
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign='center'>
+                              {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
+                            </Typography>
                           </MenuItem>
                         </Link>
                       </>
@@ -170,9 +199,9 @@ const TopNav = () => {
                   </Menu>
                 </Box>
                 <Typography
-                  variant="h6"
+                  variant='h6'
                   noWrap
-                  component="div"
+                  component='div'
                   sx={{
                     flexGrow: 1,
                     display: { xs: 'flex', md: 'none' },
@@ -180,18 +209,37 @@ const TopNav = () => {
                     fontWeight: 600,
                   }}
                 >
-                  Roob.
+                  <img
+                    src={`${process.env.PUBLIC_URL}/assets/larissa-logo.png`}
+                    alt='larissa logo'
+                    width={125}
+                    height={40}
+                  />
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                   {user?.role === 'municipality' ? (
                     <>
-                      <Link to="/preparedForms" style={{ textDecoration: 'none' }}>
-                        <Button key="Forms" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      <Link
+                        to='/preparedForms'
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button
+                          key='Forms'
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
                           Φορμες Προσφυγων
                         </Button>
                       </Link>
-                      <Link to="/municipalityForms" style={{ textDecoration: 'none' }}>
-                        <Button key="Forms" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      <Link
+                        to='/municipalityForms'
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button
+                          key='Forms'
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
                           Φορμες Ληξιαρχειου
                         </Button>
                       </Link>
@@ -210,8 +258,15 @@ const TopNav = () => {
                     </>
                   ) : (
                     <>
-                      <Link to="/preperation" style={{ textDecoration: 'none' }}>
-                        <Button key="Preperation" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      <Link
+                        to='/preperation'
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button
+                          key='Preperation'
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
                           {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
                         </Button>
                       </Link>
@@ -227,8 +282,15 @@ const TopNav = () => {
                           Validate Forms
                         </Button>
                       </Link> */}
-                      <Link to="/refugeeAppointments" style={{ textDecoration: 'none' }}>
-                        <Button key="Appointments" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      <Link
+                        to='/refugeeAppointments'
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button
+                          key='Appointments'
+                          onClick={handleCloseNavMenu}
+                          sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
                           {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
                         </Button>
                       </Link>
@@ -236,7 +298,9 @@ const TopNav = () => {
                   )}
                 </Box>
 
-                <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                <Box
+                  sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}
+                >
                   {user?.role !== 'municipality' && (
                     <NativeSelect
                       defaultValue={lang || 'gr'}
@@ -244,18 +308,26 @@ const TopNav = () => {
                         name: 'lang',
                         id: 'lang',
                       }}
-                      onChange={(event) => dispatch(setLangAction(event.target.value))}
+                      onChange={event =>
+                        dispatch(setLangAction(event.target.value))
+                      }
                       sx={{ borderColor: 'white' }}
                     >
-                      <option value="gr">Ελληνικα</option>
-                      <option value="en">English</option>
+                      <option value='gr'>Ελληνικα</option>
+                      <option value='en'>English</option>
                     </NativeSelect>
                   )}
-                  <Tooltip title={user?.role === 'municipality' ? 'Ρυθμισεις' : 'Open settings'}>
+                  <Tooltip
+                    title={
+                      user?.role === 'municipality'
+                        ? 'Ρυθμισεις'
+                        : 'Open settings'
+                    }
+                  >
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/2.jpg"
+                        alt='Remy Sharp'
+                        src='/static/images/avatar/2.jpg'
                         sx={{
                           color: 'primary.main',
                           backgroundColor: 'secondary.light',
@@ -265,7 +337,7 @@ const TopNav = () => {
                   </Tooltip>
                   <Menu
                     sx={{ mt: '45px' }}
-                    id="menu-appbar"
+                    id='menu-appbar'
                     anchorEl={anchorElUser}
                     anchorOrigin={{
                       vertical: 'top',
@@ -327,27 +399,37 @@ const TopNav = () => {
                     </MenuItem> */}
                     <MenuItem onClick={() => handleLogout()}>
                       <ListItemIcon>
-                        <Logout fontSize="small" />
+                        <Logout fontSize='small' />
                       </ListItemIcon>
-                      {user?.role === 'municipality' || lang === 'gr' ? 'Αποσυνδεση' : 'Logout'}
+                      {user?.role === 'municipality' || lang === 'gr'
+                        ? 'Αποσυνδεση'
+                        : 'Logout'}
                     </MenuItem>
                   </Menu>
                 </Box>
               </>
             ) : (
               <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                <Link to={user ? '/' : '/login'} style={{ textDecoration: 'none' }}>
+                <Link
+                  to={user ? '/' : '/login'}
+                  style={{ textDecoration: 'none' }}
+                >
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     noWrap
-                    component="div"
+                    component='div'
                     sx={{
                       mr: 2,
                       color: 'secondary.light',
                       fontWeight: 600,
                     }}
                   >
-                    Roob.
+                    <img
+                      src={`${process.env.PUBLIC_URL}/assets/larissa-logo.png`}
+                      alt='larissa logo'
+                      width={188}
+                      height={60}
+                    />
                   </Typography>
                 </Link>
                 {user?.role !== 'municipality' && (
@@ -357,11 +439,13 @@ const TopNav = () => {
                       name: 'lang',
                       id: 'lang',
                     }}
-                    onChange={(event) => dispatch(setLangAction(event.target.value))}
+                    onChange={event =>
+                      dispatch(setLangAction(event.target.value))
+                    }
                     sx={{ borderColor: 'white' }}
                   >
-                    <option value="gr">Ελληνικα</option>
-                    <option value="en">English</option>
+                    <option value='gr'>Ελληνικα</option>
+                    <option value='en'>English</option>
                   </NativeSelect>
                 )}
               </Box>
@@ -370,7 +454,7 @@ const TopNav = () => {
         </Container>
       </AppBar>
     </HideOnScroll>
-  );
+  )
 };
 
 export default TopNav;
