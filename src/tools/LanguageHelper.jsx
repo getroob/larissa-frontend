@@ -90,7 +90,7 @@ const LanguageHelper = () => {
                     rel='noopener noreferrer'
                   >
                     <img
-                      src='./assets/easyrights-logo.jpg'
+                      src={`${process.env.PUBLIC_URL}/assets/easyrights-logo.jpg`}
                       target='_blank'
                       rel='noreferrer'
                       width='90px'
@@ -108,7 +108,7 @@ const LanguageHelper = () => {
         <Fab color='primary' size='large' sx={{ borderRadius: '50%', overflow: 'hidden'}}>
           <img
             id='calst-logo'
-            src='./assets/calst-logo.png'
+            src={`${process.env.PUBLIC_URL}/assets/calst-logo.png`}
             width='85px'
             alt='CALST logo'
           />
