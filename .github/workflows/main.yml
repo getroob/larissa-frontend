@@ -34,4 +34,4 @@
             source-directory: 'build'
             destination-github-username: 'getroob'
             destination-repository-name: 'larissa-backend'
-            target-directory: 'client/'
+            target-directory: 'client'
