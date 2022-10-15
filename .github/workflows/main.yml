@@ -12,12 +12,19 @@
         - name: Checkout
           uses: actions/checkout@master
 
-        - uses: borales/actions-yarn@v3.0.0
+        - name: Yarn Install
+          uses: borales/actions-yarn@v3.0.0
           with:
-            node-version: 16
             cmd: install
 
-        - uses: borales/actions-yarn@v3.0.0
+        - name: Yarn Build
+          uses: borales/actions-yarn@v3.0.0
           with:
-            node-version: 16
             cmd: build
+        
+        - name: Create Pull Request
+          uses: peter-evans/create-pull-request@v3
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            commit-message: Add build artifact
+            title: Add build artifact
