@@ -21,10 +21,8 @@
           uses: borales/actions-yarn@v3.0.0
           with:
             cmd: build
-        - run: sudo chown -R $USER:$USER .
-        - name: Create Pull Request
-          uses: peter-evans/create-pull-request@v3
+
+        - name: Upload a Build Artifact
+          uses: actions/upload-artifact@v3.1.0
           with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            commit-message: Add build artifact
-            title: Add build artifact
+            path: build/
