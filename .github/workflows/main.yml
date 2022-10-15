@@ -14,8 +14,10 @@
 
         - uses: borales/actions-yarn@v2.0.0
           with:
+            node-version: 16
             cmd: install
 
         - uses: borales/actions-yarn@v2.0.0
           with:
+            node-version: 16
             cmd: build
