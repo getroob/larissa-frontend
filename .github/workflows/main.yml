@@ -22,7 +22,10 @@
           with:
             cmd: build
 
-        - name: Upload a Build Artifact
-          uses: actions/upload-artifact@v3.1.0
+        - name: Deploy
+          uses: crazy-max/ghaction-github-pages@v1
           with:
-            path: build/
+            target_branch: deployed
+            build_dir: build
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
