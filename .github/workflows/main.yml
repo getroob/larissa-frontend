@@ -22,10 +22,12 @@
           with:
             cmd: build
 
-        - name: Deploy
-          uses: crazy-max/ghaction-github-pages@v1
-          with:
-            target_branch: deployed
-            build_dir: build
+        - name: Pushes to another repository
+          uses: cpina/github-action-push-to-another-repository@main
           env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          with:
+            source-directory: 'build'
+            destination-github-username: 'getroob'
+            destination-repository-name: 'larissa-backend'
+            target-directory: 'client'
