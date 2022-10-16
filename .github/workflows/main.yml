@@ -9,7 +9,9 @@
   jobs:
     build:
       name: Build and test
-      environment: production
+      env:
+        REACT_APP_BE_URL: ${{ secrets.REACT_APP_BE_URL }}
+        REACT_APP_FE_URL: ${{ secrets.REACT_APP_FE_URL }}
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
