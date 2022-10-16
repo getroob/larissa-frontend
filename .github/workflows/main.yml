@@ -9,6 +9,7 @@
   jobs:
     build:
       name: Build and test
+      environment: Production
       env:
         REACT_APP_BE_URL: ${{ secrets.REACT_APP_BE_URL }}
         REACT_APP_FE_URL: ${{ secrets.REACT_APP_FE_URL }}
