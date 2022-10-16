@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { useForm, Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import {
   Container,
   Grid,
