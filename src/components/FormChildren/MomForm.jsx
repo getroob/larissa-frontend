@@ -19,7 +19,7 @@ const MomForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? "Επίθετο" : 'Last Name'}
+              label={lang === 'gr' ? "Επίθετο" : lang === 'fr' ? 'Nom de famille' : 'Last Name'}
               variant="outlined"
               value={value}
               onChange={(event) => onChange({
@@ -42,7 +42,7 @@ const MomForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? "Όνομα" : 'First Name'}
+              label={lang === 'gr' ? "Όνομα" : lang === 'fr' ? 'Prénom' : 'First Name'}
               variant="outlined"
               value={value}
               onChange={(event) => onChange({
@@ -65,7 +65,7 @@ const MomForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? "Α.Δ.Τ." : 'ID'}
+              label={lang === 'gr' ? "Α.Δ.Τ." : lang === 'fr' ? 'numéro d\'identification' : 'ID'}
               variant="outlined"
               value={value}
               onChange={onChange}

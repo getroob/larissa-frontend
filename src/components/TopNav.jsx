@@ -164,7 +164,7 @@ const TopNav = () => {
                             onClick={handleCloseNavMenu}
                           >
                             <Typography textAlign='center'>
-                              {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
+                              {lang === 'gr' ? 'Προετοιμασια' : lang === 'fr' ? 'Préparation' : 'Preperation'}
                             </Typography>
                           </MenuItem>
                         </Link>
@@ -190,7 +190,7 @@ const TopNav = () => {
                             onClick={handleCloseNavMenu}
                           >
                             <Typography textAlign='center'>
-                              {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
+                              {lang === 'gr' ? 'Ραντεβου' : lang === 'fr' ? 'rendez-vous' : 'Appointments'}
                             </Typography>
                           </MenuItem>
                         </Link>
@@ -267,7 +267,7 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: 'white', display: 'block' }}
                         >
-                          {lang === 'gr' ? 'Προετοιμασια' : 'Preperation'}
+                          {lang === 'gr' ? 'Προετοιμασια' : lang === 'fr' ? 'Préparation' : 'Preperation'}
                         </Button>
                       </Link>
                       {/* <Link
@@ -291,7 +291,7 @@ const TopNav = () => {
                           onClick={handleCloseNavMenu}
                           sx={{ my: 2, color: 'white', display: 'block' }}
                         >
-                          {lang === 'gr' ? 'Ραντεβου' : 'Appointments'}
+                          {lang === 'gr' ? 'Ραντεβου' : lang === 'fr' ? 'rendez-vous' : 'Appointments'}
                         </Button>
                       </Link>
                     </>
@@ -315,6 +315,7 @@ const TopNav = () => {
                     >
                       <option value='gr'>Ελληνικα</option>
                       <option value='en'>English</option>
+                      <option value='fr'>Français</option>
                     </NativeSelect>
                   )}
                   <Tooltip
@@ -403,6 +404,8 @@ const TopNav = () => {
                       </ListItemIcon>
                       {user?.role === 'municipality' || lang === 'gr'
                         ? 'Αποσυνδεση'
+                        : lang === 'fr'
+                        ? 'Se déconnecter'
                         : 'Logout'}
                     </MenuItem>
                   </Menu>
@@ -446,6 +449,7 @@ const TopNav = () => {
                   >
                     <option value='gr'>Ελληνικα</option>
                     <option value='en'>English</option>
+                    <option value='fr'>Français</option>
                   </NativeSelect>
                 )}
               </Box>

@@ -36,10 +36,10 @@ const Login = () => {
       } catch (error) {
         const { text } = JSON.parse(error?.message);
         console.error(text)
-        setError(lang === 'gr' ? 'Λαθος στοιχεια' : 'Please provide valid credentials');
+        setError(lang === 'gr' ? 'Λαθος στοιχεια' : lang === 'fr' ? 'Veuillez fournir des informations d\'identification valides' : 'Please provide valid credentials');
       }
     } else {
-      setError(lang === 'gr' ? 'Λαθος στοιχεια' : 'Please provide valid credentials');
+      setError(lang === 'gr' ? 'Λαθος στοιχεια' : lang === 'fr' ? 'Veuillez fournir des informations d\'identification valides' : 'Please provide valid credentials');
     }
   };
 
@@ -62,7 +62,7 @@ const Login = () => {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
-          {lang === 'gr' ? 'Συνδεση' : 'Sign in'}
+          {lang === 'gr' ? 'Συνδεση' : lang === 'fr' ? 'S\'identifier' : 'Sign in'}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -82,7 +82,7 @@ const Login = () => {
             fullWidth
             error={Boolean(error)}
             name="password"
-            label={lang === 'gr' ? 'Κωδικος' : "Password"}
+            label={lang === 'gr' ? 'Κωδικος' : lang === 'fr' ? 'Mot de passe' : "Password"}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -99,7 +99,7 @@ const Login = () => {
               color: "secondary.light",
             }}
           >
-            {lang === 'gr' ? 'Συνδεση' : 'Sign In'}
+            {lang === 'gr' ? 'Συνδεση' : lang === 'fr' ? 'S\'identifier' : 'Sign In'}
           </Button>
           <Grid container>
             {/* <Grid item xs>
@@ -109,7 +109,7 @@ const Login = () => {
             </Grid> */}
             <Grid item>
               <Link href="/register" variant="body2">
-                {lang === 'gr' ? 'Δεν εχετε λογαριασμο; Εγγραφειτε' : "Don't have an account? Sign Up"}
+                {lang === 'gr' ? 'Δεν εχετε λογαριασμο; Εγγραφειτε' : lang === 'fr' ? 'Vous n\'avez pas de compte ? S\'inscrire' : "Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

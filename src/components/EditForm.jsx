@@ -179,15 +179,15 @@ const MunicipalityForm = () => {
     //   content: <ChildForm control={control} isWritable={isWritable} />,
     // },
     {
-      label: lang === 'gr' ? 'Στοιχεία Μητέρας' : 'Info of Mother',
+      label: lang === 'gr' ? 'Στοιχεία Μητέρας' : lang === 'fr' ? 'Infos de la mère' : 'Info of Mother',
       content: <MomForm control={control} isWritable={isWritable} />,
     },
     {
-      label: lang === 'gr' ? 'Στοιχεία Πατέρα' : 'Info of Father',
+      label: lang === 'gr' ? 'Στοιχεία Πατέρα' : lang === 'fr' ? 'Infos du père' : 'Info of Father',
       content: <DadForm control={control} isWritable={isWritable} />,
     },
     {
-      label: lang === 'gr' ? 'Στοιχεία Κατοικίας' : 'Adderess Info',
+      label: lang === 'gr' ? 'Στοιχεία Κατοικίας' : lang === 'fr' ? 'Informations sur l\'adresse' : 'Adderess Info',
       content: <ResidencyForm control={control} isWritable={isWritable} />,
     },
     // {
@@ -280,7 +280,7 @@ const MunicipalityForm = () => {
   return (
     <Container component="main">
       {notFound ? (
-        <Alert color="warning">{user?.role === "municipality" || lang === 'gr' ? 'Η φορμα δεν βρεθηκε' : 'Form Not Found'}</Alert>
+        <Alert color="warning">{user?.role === "municipality" || lang === 'gr' ? 'Η φορμα δεν βρεθηκε' : lang === 'fr' ? 'Formulaire introuvable' : 'Form Not Found'}</Alert>
       ) : (
         <form>
           <Box sx={{ justifyContent: "flex-start" }}>
@@ -293,9 +293,9 @@ const MunicipalityForm = () => {
                     {activeStep === 2 && user?.role !== "refugee" && createdBy === "refugee" && (
                       <Alert color="warning" sx={{ m: 2, maxWidth: 400 }}>
                         <AlertTitle>
-                          {user?.role === "municipality" || lang === 'gr' ? 'Θελετε σιγουρα να αλλαξετε αυτη την φορμα' : 'Are you sure you want to updated it?'}
+                          {user?.role === "municipality" || lang === 'gr' ? 'Θελετε σιγουρα να αλλαξετε αυτη την φορμα' : lang === 'fr' ? 'Voulez-vous vraiment le mettre à jour ?' : 'Are you sure you want to updated it?'}
                         </AlertTitle>
-                        {user?.role === "municipality" || lang === 'gr' ? 'Αυτη η φορμα δημιουργηθηκε απο προσφυγα' :'This is a form created by a refugee.'}
+                        {user?.role === "municipality" || lang === 'gr' ? 'Αυτη η φορμα δημιουργηθηκε απο προσφυγα' : lang === 'fr' ? 'Il s\'agit d\'un formulaire créé par un réfugié.' :'This is a form created by a refugee.'}
                       </Alert>
                     )}
                     <Box
@@ -308,7 +308,7 @@ const MunicipalityForm = () => {
                         variant="contained"
                         startIcon={<ArrowBackIosNewIcon />}
                       >
-                        {user?.role === "municipality" || lang === 'gr' ? 'Πισω' :'Back'}
+                        {user?.role === "municipality" || lang === 'gr' ? 'Πισω' : lang === 'fr' ? 'Retour' : 'Back'}
                       </Button>
                       <Box sx={{ flex: "1 0 auto" }} />
                       {activeStep !== 2 ? (
@@ -317,7 +317,7 @@ const MunicipalityForm = () => {
                           variant="contained"
                           endIcon={<ArrowForwardIosIcon />}
                         >
-                          {user?.role === "municipality" || lang === 'gr' ? 'Επομενο' : 'Next'}
+                          {user?.role === "municipality" || lang === 'gr' ? 'Επομενο' : lang === 'fr' ? 'Prochain' : 'Next'}
                         </Button>
                       ) : (
                         <ButtonGroup variant="contained">
@@ -326,14 +326,14 @@ const MunicipalityForm = () => {
                             variant="contained"
                             disabled={getValues().stage !== 'edit'}
                           >
-                            {user?.role === "municipality" || lang === 'gr' ? 'Αποθήκευση' :'Save'}
+                            {user?.role === "municipality" || lang === 'gr' ? 'Αποθήκευση' : lang === 'fr' ? 'sauvegarder' :'Save'}
                           </Button>
                           <Button
                             onClick={handleSubmit((data) => onSubmit(data, true, 'done'))}
                             variant="outlined"
                             disabled={getValues().stage !== 'edit'}
                           >
-                            {user?.role === "municipality" || lang === 'gr' ? 'Οριστικοποίηση' :'Submit'}
+                            {user?.role === "municipality" || lang === 'gr' ? 'Οριστικοποίηση' : lang === 'fr' ? 'Soumettre' :'Submit'}
                           </Button>
                         </ButtonGroup>
                       )}

@@ -14,7 +14,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? 'Πόλη' : 'City'}
+              label={lang === 'gr' ? 'Πόλη' : lang === 'fr' ? 'Ville' : 'City'}
               variant="outlined"
               value={value}
               onChange={(event) => onChange({
@@ -37,7 +37,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? 'Διευθυνση' : 'Address'}
+              label={lang === 'gr' ? 'Διευθυνση' : lang === 'fr' ? 'Adresse' : 'Address'}
               variant="outlined"
               value={value}
               onChange={onChange}
@@ -53,7 +53,7 @@ const ResidencyForm = ({ isWritable, control }) => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={lang === 'gr' ? 'Τηλεφωνο' : 'Phone'}
+              label={lang === 'gr' ? 'Τηλεφωνο' : lang === 'fr' ? 'Numéro de téléphone' : 'Phone'}
               variant="outlined"
               value={value}
               onChange={(event) => onChange({

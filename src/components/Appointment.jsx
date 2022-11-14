@@ -102,7 +102,9 @@ const Appointment = () => {
       <Alert color='warning' sx={{ mb: 4 }}>
         {lang === 'gr'
           ? 'Θα πρέπει να έχετε μαζί σας κάποιο επίσημο έγγραφο ταυτοπροσωπίας, τόσο εσεις, όσο και ο επίσημος μεταφραστής ή κοινωνικός λειτουργός που θα σας συνοδεύει.'
-          : 'You must have an official identity document with you, as well as the official translator or social worker who will accompany you.'}
+          : lang === 'en'
+          ? 'You must have an official identity document with you, as well as the official translator or social worker who will accompany you.'
+          : "Vous devez avoir sur vous une pièce d'identité officielle, ainsi que le traducteur officiel ou l'assistante sociale qui vous accompagnera."}
       </Alert>
       <Typography
         variant='h5'
@@ -112,7 +114,9 @@ const Appointment = () => {
       >
         {lang === 'gr'
           ? 'Για να προγραμματίσετε το ραντεβού σας, καλέστε το ληξιαρχείο στο (+30) 2413500254'
-          : 'To schedule your appointment please call the registry office at (+30)2413500254'}
+          : lang === 'en'
+          ? 'To schedule your appointment please call the registry office at (+30)2413500254'
+          : "Pour planifier votre rendez-vous, veuillez appeler le bureau d'état civil au (+30)2413500254"}
       </Typography>
       <Typography
         variant='h6'
@@ -122,6 +126,8 @@ const Appointment = () => {
       >
         {lang === 'gr'
           ? 'Διεύθυνση: ΔΗΜΟΣ ΛΑΡΙΣΑΙΩΝ, Ίωνος Δραγούμη 1, Τ.Κ. 41222'
+          : lang === 'fr'
+          ? 'Adresse : Municipalité de Larisa, 1 rue Ionos Dragoumi C.P. 41222'
           : 'Address: Municipality of Larisa, 1 Ionos Dragoumi str P.C. 41222'}
       </Typography>
       <Button variant='contained'>
@@ -129,7 +135,7 @@ const Appointment = () => {
           href='tel:+30 2413500254'
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          {lang === 'gr' ? 'Κληση' : 'Call'}
+          {lang === 'gr' ? 'Κληση' : lang === 'fr' ? 'Appel' : 'Call'}
         </a>
       </Button>
       {/* {forms.length > 0 ? (

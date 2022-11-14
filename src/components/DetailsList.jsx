@@ -54,14 +54,14 @@ const DetailsList = (props) => {
   const columns = [
     {
       id: "stage",
-      label: lang === 'gr' ? 'Στάδιο' : 'Stage',
+      label: lang === 'gr' ? 'Στάδιο' : lang === 'fr' ? 'Organiser' : 'Stage',
       minWidth: 170,
     },
     // { id: "childFullName", label: "Όνομα Παιδίου", minWidth: 170 },
-    { id: 'fatherFullName', label: lang === 'gr' ? 'Όνομα Πατέρα' : 'Father Name', minWidth: 100 },
-    { id: 'motherFullName', label: lang === 'gr' ? 'Όνομα Μητέρας' : 'Mother Name' },
-    { id: 'phone', label: lang === 'gr' ? 'Τηλεφωνο' : 'Phone', minWidth: 100 },
-    { id: 'options', label: lang === 'gr' ? 'Αλλο' : 'Other', minWidth: 100 },
+    { id: 'fatherFullName', label: lang === 'gr' ? 'Όνομα Πατέρα' : lang === 'fr' ? 'Nom du père' : 'Father Name', minWidth: 100 },
+    { id: 'motherFullName', label: lang === 'gr' ? 'Όνομα Μητέρας' : lang === 'fr' ? 'Nom de la mère' : 'Mother Name' },
+    { id: 'phone', label: lang === 'gr' ? 'Τηλεφωνο' : lang === 'fr' ? 'Numéro de téléphone' : 'Phone', minWidth: 100 },
+    { id: 'options', label: lang === 'gr' ? 'Αλλο' : lang === 'fr' ? 'Autre' : 'Other', minWidth: 100 },
   ];
 
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -250,12 +250,12 @@ const DetailsList = (props) => {
     <Container>
       {props.type === 'preparedForms' ? (
         <Typography component="h5" variant="h5" sx={{ mb: 4 }}>
-          {user?.role === 'municipality' || lang === 'gr' ? 'Φορμες Προσφυγων' : 'Refugee Forms'}
+          {user?.role === 'municipality' || lang === 'gr' ? 'Φορμες Προσφυγων' : lang === 'fr' ? 'Formulaires de réfugiés' : 'Refugee Forms'}
         </Typography>
       ) : (
         props.type === 'municipalityForms' && (
           <Typography component="h5" variant="h5" sx={{ mb: 4 }}>
-            {user?.role === 'municipality' || lang === 'gr' ? 'Φορμες Ληξιαρχειου' : 'Municipality Forms'}
+            {user?.role === 'municipality' || lang === 'gr' ? 'Φορμες Ληξιαρχειου' : lang === 'fr' ? 'Formulaires municipaux' : 'Municipality Forms'}
           </Typography>
         )
       )}
@@ -264,7 +264,7 @@ const DetailsList = (props) => {
           {user?.role === 'municipality' && (
             <div>
               <Button variant="outlined" onClick={() => clickCsv()} sx={{mx: 3}}>
-                {lang === 'gr' ? 'Ληψη Backup' : 'Download Backup'}
+                {lang === 'gr' ? 'Ληψη Backup' : lang === 'fr' ? 'Télécharger la sauvegarde' : 'Download Backup'}
               </Button>
               <CSVLink
                 ref={csvLink}
@@ -289,9 +289,13 @@ const DetailsList = (props) => {
             {rows.filter(row => row.stage !== 'deleted').length >= 2 && user?.role === 'refugee'
               ? lang === 'gr'
                 ? 'Μεγιστος αριθμος φορμων: 2' 
+                : lang === 'fr'
+                ? 'Nombre maximum de formulaires autorisés : 2'
                 : 'Max forms allowed: 2'
               : user?.role === 'municipality' || lang === 'gr'
               ? 'Νεα Φορμα'
+              : lang === 'fr'
+              ? 'Ajouter un formulaire'
               : 'Add Form'}
           </Button>
         </Grid>
@@ -303,16 +307,16 @@ const DetailsList = (props) => {
         indicatorColor="primary"
         aria-label="primary tabs example"
       >
-        <Tab value="all" label={lang === 'gr' ? 'Όλες' : 'All'} />
+        <Tab value="all" label={lang === 'gr' ? 'Όλες' : lang === 'fr' ? 'Toute' : 'All'} />
         <Tab value="edit" label={props.type === 'preperation' || props.type === 'preparedForms' 
-          ? lang === 'gr' ? 'Σε Σύνταξη' : 'Temporarily Saved'
-          : lang === 'gr' ? 'Σε Επεξεργασία' : 'Temporarily Saved'
+          ? lang === 'gr' ? 'Σε Σύνταξη' : lang === 'fr' ? 'Temporairement enregistré' : 'Temporarily Saved'
+          : lang === 'gr' ? 'Σε Επεξεργασία' : lang === 'fr' ? 'Temporairement enregistré' : 'Temporarily Saved'
         } />
         <Tab value="done" label={props.type === 'preperation' || props.type === 'preparedForms' 
-          ? lang === 'gr' ? 'Υποβληθείσες' : 'Submitted'
-          : lang === 'gr' ? 'Ολοκληρωμένες' : 'Submitted'
+          ? lang === 'gr' ? 'Υποβληθείσες' : lang === 'fr' ? 'Soumise' : 'Submitted'
+          : lang === 'gr' ? 'Ολοκληρωμένες' : lang === 'fr' ? 'Soumise' : 'Submitted'
         } />
-        <Tab value="deleted" label={lang === 'gr' ? 'Διεγραμένες' : 'Deleted'} />
+        <Tab value="deleted" label={lang === 'gr' ? 'Διεγραμένες' : lang === 'fr' ? 'Supprimé' : 'Deleted'} />
       </Tabs>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
@@ -363,29 +367,41 @@ const DetailsList = (props) => {
                                 ? row.stage === 'edit' 
                                   ? lang === 'gr' 
                                     ? 'Σε Σύνταξη' 
+                                    : lang === 'fr'
+                                    ? 'Temporairement enregistré'
                                     : 'Temporarily Saved' 
                                 : row.stage === 'done' 
                                   ? lang === 'gr' 
                                     ? 'Υποβληθείσα' 
+                                    : lang === 'fr'
+                                    ? 'Soumise'
                                     : 'Submitted' 
                                 : row.stage === 'deleted' 
                                   ? lang === 'gr' 
                                     ? 'Διεγραμένες' 
+                                    : lang === 'fr'
+                                    ? 'Supprimé'
                                     : 'Deleted' 
-                                : lang === 'gr' ? 'Άγνωστο' : 'Unknown'
+                                : lang === 'gr' ? 'Άγνωστο' : lang === 'fr' ? 'Inconnue' :  'Unknown'
                               : row.stage === 'edit' 
                                   ? lang === 'gr' 
                                     ? 'Σε Επεξεργάσια' 
+                                    : lang === 'fr'
+                                    ? 'Temporairement enregistré'
                                     : 'Temporarily Saved' 
                                 : row.stage === 'done' 
                                   ? lang === 'gr' 
                                     ? 'Ολοκληρωμένες' 
+                                    : lang === 'fr'
+                                    ? 'Soumise'
                                     : 'Submitted' 
                                 : row.stage === 'deleted' 
                                   ? lang === 'gr' 
                                     ? 'Διεγραμένες' 
+                                    : lang === 'fr'
+                                    ? 'Supprimé'
                                     : 'Deleted' 
-                                : lang === 'gr' ? 'Άγνωστο' : 'Unknown'} 
+                                : lang === 'gr' ? 'Άγνωστο' : lang === 'fr' ? 'Inconnue' : 'Unknown'} 
                               color={
                                 row.stage === 'edit' ? 'warning' 
                                 : row.stage === 'done' ? 'success' 
@@ -401,7 +417,7 @@ const DetailsList = (props) => {
                                 disabled={row.stage !== 'edit'}
                                 onClick={() => window.location.replace(`/forms/${row.id}`)}
                               >
-                                {lang === 'gr' ? 'Επεξεργασια' : 'Edit'}
+                                {lang === 'gr' ? 'Επεξεργασια' : lang === 'fr' ? 'Éditer' : 'Edit'}
                               </Button>
                               <Button
                                 variant="outlined"
@@ -589,7 +605,7 @@ const DetailsList = (props) => {
                                 PDF
                               </Button>
                               <Button variant="outlined" color="error" size="small" disabled={row.stage === 'deleted'} onClick={() => setOpenModal(row.id)}>
-                                {lang === 'gr' ? 'Διαγραφη' : 'Delete'}
+                                {lang === 'gr' ? 'Διαγραφη' : lang === 'fr' ? 'Effacer' : 'Delete'}
                               </Button>
                             </ButtonGroup>
                           ) : (
@@ -612,11 +628,11 @@ const DetailsList = (props) => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           labelDisplayedRows={({ from, to, count }) => {
-            return `${from}–${to} ${lang === 'gr' ? 'απο' : 'from'} ${
-              count !== -1 ? count : `${lang === 'gr' ? 'περισσοτερο απο' : 'more than'} ${to}`
+            return `${from}–${to} ${lang === 'gr' ? 'απο' : lang === 'fr' ? 'de' : 'from'} ${
+              count !== -1 ? count : `${lang === 'gr' ? 'περισσοτερο απο' : lang === 'fr' ? 'plus que' : 'more than'} ${to}`
             }`;
           }}
-          labelRowsPerPage={user?.role === 'municipality' || lang === 'gr' ? 'Φορμες ανα σελιδα:' : 'Rows per page:'}
+          labelRowsPerPage={user?.role === 'municipality' || lang === 'gr' ? 'Φορμες ανα σελιδα:' : lang === 'fr' ? 'Lignes par page :' : 'Rows per page:'}
         />
       </Paper>
       <Dialog
@@ -630,21 +646,25 @@ const DetailsList = (props) => {
             <DialogTitle id="alert-dialog-title">
               {user?.role === 'municipality' || lang === 'gr'
                 ? 'Θελετε σιγουρα να διαγραψετε οριστικά αυτην την φορμα;'
+                : lang === 'fr' 
+                ? 'Êtes-vous sûr de vouloir supprimer définitivement ce formulaire ?'
                 : 'Are you sure you want to permanently delete this form?'}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 {user?.role === 'municipality' || lang === 'gr'
                   ? 'Αυτη η επιλογη δεν μπορει να αναιρεθει αργοτερα'
+                  : lang === 'fr' 
+                  ? 'Cette action ne peut pas être annulée'
                   : 'This action cannot be undone'}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button variant="contained" color="success" onClick={() => handleModal(false)}>
-                {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : 'Cancel'}
+                {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : lang === 'fr' ? 'Annuler' : 'Cancel'}
               </Button>
               <Button variant="outlined" color="error" onClick={() => handleDeleteForm(true, openModal)} autoFocus>
-                {user?.role === 'municipality' || lang === 'gr' ? 'Οριστική Διαγραφη' : 'Permanently Delete'}
+                {user?.role === 'municipality' || lang === 'gr' ? 'Οριστική Διαγραφη' : lang === 'fr' ? 'Effacé définitivement' : 'Permanently Delete'}
               </Button>
             </DialogActions>
           </> : 
@@ -652,21 +672,25 @@ const DetailsList = (props) => {
             <DialogTitle id="alert-dialog-title">
               {user?.role === 'municipality' || lang === 'gr'
                 ? 'Θελετε σιγουρα να μετακινησετε αυτην την φορμα στις διεγραμμένες;'
+                : lang === 'fr' 
+                ? 'Voulez-vous vraiment déplacer ce formulaire vers l\'étape de suppression ?'
                 : 'Are you sure you want to move this form to deleted stage?'}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 {user?.role === 'municipality' || lang === 'gr'
                   ? 'Αυτη η επιλογη δεν μπορει να αναιρεθει αργοτερα'
+                  : lang === 'fr' 
+                  ? 'Cette action ne peut pas être annulée'
                   : 'This action cannot be undone'}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button variant="contained" color="success" onClick={() => handleModal(false)}>
-                {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : 'Cancel'}
+                {user?.role === 'municipality' || lang === 'gr' ? 'Ακυρωση' : lang === 'fr' ? 'Annuler' : 'Cancel'}
               </Button>
               <Button variant="outlined" color="error" onClick={() => handleStageDeleteForm(true, openModal)} autoFocus>
-                {user?.role === 'municipality' || lang === 'gr' ? 'Διαγραφη' : 'Delete'}
+                {user?.role === 'municipality' || lang === 'gr' ? 'Διαγραφη' : lang === 'fr' ? 'Effacer' : 'Delete'}
               </Button>
             </DialogActions>
           </>

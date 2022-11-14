@@ -15,7 +15,7 @@ const Home = () => {
     if (!user) window.location.href = "/login";
   }, [user]);
 
-  return <div>{user?.role === "municipality" || lang === 'gr' ? 'Ανακατευθυνση...' : 'Redirecting...'}</div>;
+  return <div>{user?.role === "municipality" || lang === 'gr' ? 'Ανακατευθυνση...' : lang === 'fr' ? 'réorienter...' : 'Redirecting...'}</div>;
 };
 
 export default Home;
